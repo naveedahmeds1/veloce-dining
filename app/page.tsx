@@ -121,7 +121,7 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Clean OpenStreetMap Implementation - No API Errors, Smooth Render */}
+          {/* OpenStreetMap Embed Code - Dynamic Link Fixed */}
           <div className="w-full h-[280px] rounded-lg overflow-hidden border border-zinc-900 relative bg-zinc-950">
             <iframe
               title="Operational Map System"
@@ -129,7 +129,7 @@ export default function Home() {
               height="100%"
               frameBorder="0"
               scrolling="no"
-              src="https://maps.google.com/maps?q=Karachi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=66.9000%2C24.8000%2C67.1000%2C24.9500&amp;layer=mapnik"
               className="opacity-70 invert-[0.92] hue-rotate-[180deg] saturate-[0.6] border-0"
             />
             <div className="absolute bottom-3 left-3 bg-black/90 border border-zinc-900 px-3 py-1 rounded text-[9px] text-zinc-500 font-mono tracking-tight pointer-events-none">
@@ -138,7 +138,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Operational Diagnostics Panel */}
+        {/* Operational Diagnostics Panel - Less than sign issue completely resolved */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 pt-4 border-t border-zinc-900 text-[10px] font-mono text-zinc-600">
           <div>
             <div>Database Layer</div>
@@ -146,7 +146,7 @@ export default function Home() {
           </div>
           <div className="text-left md:text-center">
             <div>Latency Core</div>
-            <div className="text-emerald-500 mt-0.5">&lt; 14ms Response</div>
+            <div className="text-emerald-500 mt-0.5">{"< 14ms Response"}</div>
           </div>
           <div className="text-left md:text-right col-span-2 md:col-span-1">
             <div>Security Architecture</div>
@@ -162,4 +162,4 @@ export default function Home() {
       </footer>
     </div>
   );
-      }
+        }
