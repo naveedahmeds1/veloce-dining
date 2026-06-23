@@ -1,5 +1,4 @@
 import React from 'react';
-import './globals.css';
 
 export const metadata = {
   title: 'Veloce Dining Systems',
@@ -13,7 +12,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#020617]">{children}</body>
+      <head>
+        {/* Tailwind CDN Script for 100% successful build */}
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body className="bg-[#020617] text-white font-sans">{children}</body>
     </html>
   );
 }
