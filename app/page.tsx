@@ -112,16 +112,19 @@ export default function Home() {
           </button>
         </div>
 
-        {/* 100% WORKING ERROR-FREE MAP SECTION */}
+        {/* ERROR-FREE MAP WINDOW ON THE DINING WEB */}
         <div className="w-full bg-zinc-950/40 border border-zinc-900 p-5 rounded-xl text-left">
-          <div className="flex items-center gap-2 mb-4 pb-2 border-b border-zinc-900">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <h2 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-              Live Dispatch Core / Operational Area
-            </h2>
+          <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-900">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <h2 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                Live Dispatch Core / Operational Area
+              </h2>
+            </div>
+            <span className="text-[9px] text-zinc-500 font-mono">STATUS: ACTIVE</span>
           </div>
 
-          {/* OpenStreetMap Embed Code - Dynamic Link Fixed */}
+          {/* OpenStreetMap Embed - Fixed No API Error Structure */}
           <div className="w-full h-[280px] rounded-lg overflow-hidden border border-zinc-900 relative bg-zinc-950">
             <iframe
               title="Operational Map System"
@@ -138,7 +141,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Operational Diagnostics Panel - Less than sign issue completely resolved */}
+        {/* Operational Diagnostics Panel */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 pt-4 border-t border-zinc-900 text-[10px] font-mono text-zinc-600">
           <div>
             <div>Database Layer</div>
@@ -162,4 +165,4 @@ export default function Home() {
       </footer>
     </div>
   );
-        }
+}
