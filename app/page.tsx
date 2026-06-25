@@ -10,8 +10,8 @@ const PREMIUM_PRODUCTS = [
     tagline: "The speed of light. Now enterprise grade.", 
     price: "$1,299", 
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80",
-    description: "Our most advanced automated high-frequency liquidity router. Engineered with surgical precision for flawless financial telemetry.", 
-    specs: ["99.999% Guaranteed Network Uptime", "Zero-Latency Custom Fiber Routing", "Multi-Layer Silicon-Level Encryption"], 
+    description: "Our most advanced automated high-frequency liquidity router. Engineered with surgical precision for flawless financial telemetry, quantum-safe data encryption pipelines, and zero-friction execution matrices.", 
+    specs: ["99.999% Guaranteed Network Uptime", "Zero-Latency Custom Fiber Routing Cluster", "Multi-Layer Silicon-Level Cryptographic Vault"], 
     badge: "Pro Edition" 
   },
   { 
@@ -20,9 +20,29 @@ const PREMIUM_PRODUCTS = [
     tagline: "Neural computing. Decentralized.", 
     price: "$2,450", 
     image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80",
-    description: "A liquid-cooled hardware computation stack built explicitly for deep learning, local artificial intelligence nodes, and complex clustering.", 
-    specs: ["256 Terahashes/s Neural Processor", "Sintered Ceramic Liquid-Cooled Chassis", "Instant Out-of-the-Box API Integration"], 
+    description: "A liquid-cooled hardware computation stack built explicitly for deep learning arrays, local artificial intelligence neural nodes, and complex autonomous algorithmic clustering.", 
+    specs: ["256 Terahashes/s Neural Network Core", "Sintered Ceramic Liquid-Cooled Enclosure", "Instant Out-of-the-Box Native API Gateway"], 
     badge: "Limited Drop" 
+  },
+  { 
+    id: "p3", 
+    name: "Aether Grid Matrix Switch", 
+    tagline: "Unparalleled Bandwidth Dynamics.", 
+    price: "$1,850", 
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+    description: "Enterprise-grade high-density backplane interface built for decentralized optical load-balancing. Optimizes server matrix topology distributions across multi-cloud environments automatically.", 
+    specs: ["800 Gbps Core Processing Throughput", "AI-Driven Predictive Path Telemetry", "Hot-Swappable Liquid Thermal Sync Blocks"], 
+    badge: "Enterprise" 
+  },
+  { 
+    id: "p4", 
+    name: "Stellaris Field Terminal v2", 
+    tagline: "Tactical UI Infrastructure Engine.", 
+    price: "$3,100", 
+    image: "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=600&q=80",
+    description: "A professional physical monitoring deck configured with biometric safety parameters. Built to orchestrate real-time stream tracking telemetry, terminal pipelines, and visual cyber-lounge layouts.", 
+    specs: ["4K Matte Ambient Low-Reflectivity Display", "Solid Titanium Anodized Chassis Deck", "Direct Hardware Uplink Overrides Available"], 
+    badge: "Elite Flagship" 
   }
 ];
 
@@ -35,8 +55,6 @@ const MENU_ITEMS = [
 
 export default function IntegratedPortfolio(): JSX.Element {
   const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
-  
-  // Dining Core Sub-Routing Navigation System
   const [diningTab, setDiningTab] = useState<'home' | 'menu' | 'reservation' | 'tracking' | 'events'>('home');
   const [diningFilter, setDiningFilter] = useState<string>('All');
   const [diningManifest, setDiningManifest] = useState<{ id: string; name: string; price: number }[]>([]);
@@ -73,8 +91,8 @@ export default function IntegratedPortfolio(): JSX.Element {
 
   useEffect(() => {
     if (activeApp === 'ecommerce' && ecomTab === 'tracking') {
-      setTerminalLogs(["Connecting to global logistics telemetry...", "Secure handshake established via Dublin-1 Node."]);
-      const phrases = ["Package verified at primary distribution hub.", "Custom authorization cleared successfully.", "Dispatching autonomous delivery drone vector.", "Telemetry link stable. Estimated drop imminent."];
+      setTerminalLogs(["Connecting to global infrastructure telemetry secure layers...", "Handshake validation cleared via Frankfurt-4 Node Core..."]);
+      const phrases = ["Hardware node serialization key parsed.", "Secure transaction hash submitted to main terminal network.", "Autonomous vector courier cleared for drone pad takeoff.", "Laser path trajectory initialized. Delivery ETA: Imminent."];
       const timers = phrases.map((phrase, index) => setTimeout(() => setTerminalLogs(prev => [...prev, phrase]), (index + 1) * 1200));
       return () => timers.forEach(clearTimeout);
     }
@@ -104,7 +122,6 @@ export default function IntegratedPortfolio(): JSX.Element {
       {/* ================= VELOCE DINING SUITE PLATFORM ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
-          {/* PROFESSIONAL APP SUB HEADER NAVIGATION */}
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-purple-400 hover:text-purple-300 transition-all">← Exit To Deck</button>
             <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800">
@@ -116,7 +133,6 @@ export default function IntegratedPortfolio(): JSX.Element {
           </header>
 
           <main className="max-w-5xl mx-auto px-4 py-12">
-            {/* VIEW 1: HOME PAGE / LANDING PAGE */}
             {diningTab === 'home' && (
               <div className="space-y-16 animate-fadeIn">
                 <div className="relative h-[420px] rounded-[2.5rem] overflow-hidden bg-cover bg-center flex items-center p-8 sm:p-12 border border-zinc-900" style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80')` }}>
@@ -127,7 +143,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                     <div className="pt-4 flex gap-3"><button onClick={() => setDiningTab('menu')} className="bg-white hover:bg-zinc-200 text-black font-semibold text-xs px-5 py-3 rounded-xl transition-all">Explore Smart Menu</button><button onClick={() => setDiningTab('reservation')} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs px-5 py-3 rounded-xl font-medium transition-all">Book Secure Table</button></div>
                   </div>
                 </div>
-                {/* METRICS ROW */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   {[
                     { val: "12,400+", label: "Dispatched Telemetry" },
@@ -141,7 +156,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* VIEW 2: SMART DIGITAL MENU */}
             {diningTab === 'menu' && (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fadeIn">
                 <div className="lg:col-span-2 space-y-6">
@@ -164,7 +178,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                     ))}
                   </div>
                 </div>
-                {/* INTERACTIVE SIDEBAR MANIFEST QUEUE */}
                 <div className="bg-zinc-900/20 border border-zinc-900 rounded-[2rem] p-6 h-fit font-mono">
                   <div className="flex justify-between items-center mb-4 pb-2 border-b border-zinc-900"><h3 className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">// Transaction Queue</h3><span className="text-[10px] bg-zinc-900 px-2.5 py-0.5 rounded text-purple-400 border border-zinc-800">{diningManifest.length} Items</span></div>
                   {diningManifest.length === 0 && !diningTrackingActive ? (<p className="text-center py-8 text-[10px] text-zinc-600">Manifest Queue Empty. Awaiting allocation parameters...</p>) : (
@@ -239,64 +252,89 @@ export default function IntegratedPortfolio(): JSX.Element {
         </div>
       )}
 
-      {/* ================= LUXURY APPLE-STYLE E-COMMERCE HUB ================= */}
+      {/* ================= APEX MATRIX LUXURY STOREFRONT PLATFORM ================= */}
       {activeApp === 'ecommerce' && (
-        <div className="min-h-screen bg-black text-[#f5f5f7]">
+        <div className="min-h-screen bg-black text-[#f5f5f7] font-sans">
           <header className="sticky top-0 z-40 bg-black/70 backdrop-blur-xl border-b border-zinc-900/50 px-6 lg:px-16 py-4 flex items-center justify-between">
-            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white">← Return to Deck</button>
+            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Deck</button>
             <nav className="flex bg-zinc-900/40 border border-zinc-800/60 p-1 rounded-full">
-              <button onClick={() => setEcomTab('shop')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Store</button>
-              <button onClick={() => setEcomTab('checkout')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Checkout</button>
-              <button onClick={() => setEcomTab('tracking')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'tracking' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Telemetry</button>
+              <button onClick={() => setEcomTab('shop')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Store Grid</button>
+              <button onClick={() => setEcomTab('checkout')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Authorization</button>
+              <button onClick={() => setEcomTab('tracking')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'tracking' ? 'bg-white text-black font-semibold' : 'text-zinc-400'}`}>Telemetry Logs</button>
             </nav>
-            <div className="relative bg-zinc-900/60 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center"><span>⚡</span>{cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-white text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">{cartCount}</span>}</div>
+            <div className="relative bg-zinc-900/60 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center text-xs"><span>⚡</span>{cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-white text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lg">{cartCount}</span>}</div>
           </header>
           <main className="max-w-5xl mx-auto px-6 py-16">
             {ecomTab === 'shop' && (
-              <div>
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                  <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-6 leading-[1.1]">Tomorrow's Hardware. <br /><span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 via-zinc-400 to-zinc-600">Available for allocation today.</span></h1>
-                  <p className="text-zinc-500 text-xs max-w-md mx-auto leading-relaxed">Surgically built computing devices designed for high-performance networks, continuous operation, and absolute luxury interfaces.</p>
+              <div className="space-y-16 animate-fadeIn">
+                <div className="text-center max-w-2xl mx-auto">
+                  <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-5 leading-[1.15]">Tomorrow's Core Hardware. <br /><span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 via-zinc-400 to-zinc-700">Available for allocation today.</span></h1>
+                  <p className="text-zinc-500 text-xs max-w-md mx-auto leading-relaxed font-light">Surgically engineered computing devices configured for decentralized neural networks, industrial routing matrices, and high-end security environments.</p>
                 </div>
+                
                 <div className="grid md:grid-cols-2 gap-8">
                   {PREMIUM_PRODUCTS.map((product) => (
-                    <div key={product.id} className="bg-gradient-to-b from-zinc-950 to-black border border-zinc-900 rounded-[2.5rem] p-6 flex flex-col justify-between shadow-2xl overflow-hidden">
+                    <div key={product.id} className="bg-gradient-to-b from-zinc-950 via-zinc-950 to-black border border-zinc-900 hover:border-zinc-800/80 rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all overflow-hidden group">
                       <div>
-                        <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-2xl mb-6 grayscale opacity-70" />
-                        <div className="flex items-center justify-between mb-4"><span className="text-[9px] font-mono font-semibold tracking-widest uppercase text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800/50">{product.badge}</span><span className="text-sm font-mono text-zinc-400">{product.price}</span></div>
+                        <div className="w-full h-56 overflow-hidden rounded-2xl mb-6 border border-zinc-900">
+                          <img src={product.image} alt={product.name} className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" />
+                        </div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[9px] font-mono font-semibold tracking-widest uppercase text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800/60">{product.badge}</span>
+                          <span className="text-sm font-mono font-bold text-white bg-zinc-900/40 border border-zinc-900 px-3 py-1 rounded-lg">{product.price}</span>
+                        </div>
                         <h3 className="text-2xl font-medium text-white tracking-tight mb-1">{product.name}</h3>
                         <p className="text-xs text-zinc-500 font-mono tracking-wide mb-4 uppercase">{product.tagline}</p>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 font-light">{product.description}</p>
-                        <div className="border-t border-zinc-900 pt-4 mb-6">
+                        <p className="text-zinc-400 text-xs leading-relaxed mb-6 font-light">{product.description}</p>
+                        
+                        <div className="border-t border-zinc-900/80 pt-5 mb-6">
+                          <h4 className="text-[10px] uppercase font-mono tracking-wider text-zinc-500 mb-3">// Structural Parameters</h4>
                           <ul className="space-y-2.5">
-                            {product.specs.map((spec, idx) => (<li key={idx} className="text-xs text-zinc-500 flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>{spec}</li>))}
+                            {product.specs.map((spec, idx) => (
+                              <li key={idx} className="text-xs text-zinc-400 flex items-center gap-3 bg-zinc-900/20 px-3 py-2 rounded-xl border border-zinc-900/40"><span className="w-1 h-1 rounded-full bg-white animate-pulse"></span>{spec}</li>
+                            ))}
                           </ul>
                         </div>
                       </div>
-                      <button onClick={() => { setCartCount(c => c + 1); triggerNotification(`Added ${product.name} to secure allocation.`); }} className="w-full bg-[#f5f5f7] hover:bg-white text-black font-medium text-xs py-4 rounded-2xl transition-all">Request Allocation</button>
+                      <button onClick={() => { setCartCount(c => c + 1); triggerNotification(`Allocated ${product.name} to core system pipeline bundle.`); }} className="w-full bg-[#f5f5f7] hover:bg-white text-black font-semibold text-xs py-4 rounded-2xl transition-all shadow-md">Request Hardware Allocation</button>
                     </div>
                   ))}
                 </div>
               </div>
             )}
+
             {ecomTab === 'checkout' && (
-              <div className="max-w-md mx-auto bg-zinc-950 border border-zinc-900 rounded-[2rem] p-8 shadow-2xl">
-                <div className="mb-8"><h2 className="text-2xl font-normal text-white tracking-tight">System Initialization</h2><p className="text-xs text-zinc-500 mt-1">Provide secure terminal data for logistics pipeline clearance.</p></div>
-                <form onSubmit={(e) => { e.preventDefault(); triggerNotification("Routing telemetry package..."); setEcomTab('tracking'); }} className="space-y-4">
-                  <input type="text" required placeholder="Full Name" className="w-full bg-zinc-900/30 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-3.5 text-xs text-zinc-200 focus:outline-none" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-                  <input type="email" required placeholder="Network Routing Email" className="w-full bg-zinc-900/30 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-3.5 text-xs text-zinc-200 focus:outline-none" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-                  <textarea required rows={3} placeholder="Terminal Delivery Coordinates" className="w-full bg-zinc-900/30 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-3.5 text-xs text-zinc-200 focus:outline-none resize-none" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
-                  <button type="submit" className="w-full bg-white hover:bg-[#f5f5f7] text-black font-semibold text-xs py-4 rounded-2xl mt-2 transition-all">Authorize Secure Link</button>
+              <div className="max-w-md mx-auto bg-zinc-950 border border-zinc-900 rounded-[2.5rem] p-8 shadow-2xl animate-fadeIn">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-normal text-white tracking-tight">System Infrastructure Initialization</h2>
+                  <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed font-light">Provide certified spatial node coordinate data to initiate secure logistics clearing pipelines.</p>
+                </div>
+                <form onSubmit={(e) => { e.preventDefault(); triggerNotification("Routing encrypted telemetry package parameters..."); setEcomTab('tracking'); }} className="space-y-4">
+                  <input type="text" required placeholder="Authorized Identity Name" className="w-full bg-zinc-900/20 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-4 text-xs text-zinc-200 focus:outline-none transition-all" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                  <input type="email" required placeholder="Secure Network Uplink Email" className="w-full bg-zinc-900/20 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-4 text-xs text-zinc-200 focus:outline-none transition-all" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                  <textarea required rows={3} placeholder="Terminal Node Coordinates & Physical Delivery Address" className="w-full bg-zinc-900/20 border border-zinc-900 focus:border-zinc-700 rounded-2xl px-4 py-4 text-xs text-zinc-200 focus:outline-none resize-none transition-all" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
+                  <button type="submit" className="w-full bg-white hover:bg-[#f5f5f7] text-black font-bold text-xs py-4 rounded-2xl mt-3 transition-all shadow-lg">Authorize Secure Requisition Link</button>
                 </form>
               </div>
             )}
+
             {ecomTab === 'tracking' && (
-              <div className="max-w-xl mx-auto">
-                <div className="flex items-center justify-between mb-5 px-1"><div className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span><h2 className="text-xs font-mono tracking-widest text-zinc-400 uppercase">Live Pipeline Telemetry</h2></div><span className="text-[10px] font-mono text-zinc-600">UPLINK ENCRYPTED</span></div>
-                <div className="bg-zinc-950 border border-zinc-900 rounded-2xl p-6 font-mono text-xs text-zinc-300 min-h-[250px] shadow-2xl">
-                  <div className="space-y-3.5">
-                    {terminalLogs.map((log, index) => (<p key={index} className="text-zinc-400">&gt; [SYS-LOG] {log}</p>))}
-                    <div className="w-1.5 h-3.5 bg-zinc-500 animate-pulse inline-block align-middle"></div>
+              <div className="max-w-xl mx-auto space-y-6 animate-fadeIn">
+                <div className="flex items-center justify-between mb-2 px-1">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <h2 className="text-xs font-mono tracking-widest text-zinc-400 uppercase">Live Pipeline Telemetry Monitor</h2>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-600 bg-zinc-900/50 border border-zinc-900 px-2 py-0.5 rounded">UPLINK ENCRYPTED</span>
+                </div>
+                <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-6 font-mono text-xs text-zinc-300 min-h-[260px] shadow-2xl flex flex-col justify-between">
+                  <div className="space-y-4">
+                    {terminalLogs.length === 0 ? (
+                      <p className="text-zinc-600 text-[11px] text-center py-8">&gt; Awaiting hardware data validation parameters. Submit form on Authorization page first.</p>
+                    ) : (
+                      terminalLogs.map((log, index) => (<p key={index} className="text-zinc-400 leading-relaxed">&gt; [SYS-TELEMETRY] {log}</p>))
+                    )}
+                    {terminalLogs.length > 0 && <div className="w-1.5 h-3.5 bg-zinc-500 animate-pulse inline-block align-middle ml-1"></div>}
                   </div>
                 </div>
               </div>
@@ -309,7 +347,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'portfolio' && (
         <main className="max-w-4xl mx-auto px-6 py-12">
           <nav className="flex justify-between items-center mb-24 border-b border-zinc-800/50 pb-6"><span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent tracking-tight">Naveed.dev</span><span className="px-4 py-1.5 text-xs font-semibold rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400">Available for Hire</span></nav>
-          <section className="mb-24">
+          <section className="mb-24 animate-fadeIn">
             <span className="text-xs font-semibold tracking-widest text-purple-400 uppercase bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Expert Custom Code & Core Architect</span>
             <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">I craft high-performance <br /><span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">digital experiences.</span></h1>
             <p className="text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed font-light">Specializing in building clean, fast, and bespoke frontend systems using <strong>Next.js</strong> and <strong>Tailwind CSS</strong>.</p>
@@ -328,18 +366,18 @@ export default function IntegratedPortfolio(): JSX.Element {
           <section className="mb-32">
             <h2 className="text-2xl font-bold text-zinc-100 mb-10 tracking-tight flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-purple-500 inline-block animate-pulse"></span>Featured Production Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6">
+              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Veloce Dining Systems</h3><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">LIVE SIMULATION</span></div>
-                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An interactive digital restaurant concierge and multi-page workflow system. Implements responsive framework filters and live courier analytics pipelines.</p>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An interactive digital restaurant concierge and multi-page workflow system. Implements responsive framework filters, gourmet photography matrices, and live courier analytics pipelines.</p>
                 </div>
                 <button onClick={() => { handleNavigation('dining'); setDiningTab('home'); setDiningTrackingActive(false); }} className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-purple-400 transition-all">Launch Console App →</button>
               </div>
 
-              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col justify-between gap-6">
+              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Apex Matrix Storefront</h3><span className="text-[10px] font-mono bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
-                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An ultra-premium, high-end B2B enterprise hardware storefront and automated logistics telemetry dashboard. Built to simulate elite procurement workflows.</p>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An ultra-premium, high-end B2B enterprise hardware storefront and automated logistics telemetry dashboard. Built explicitly to showcase elite asset procurement grids.</p>
                 </div>
                 <button onClick={() => { handleNavigation('ecommerce'); setEcomTab('shop'); }} className="w-fit bg-white text-black text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-zinc-200 transition-all">Launch Enterprise Portal →</button>
               </div>
@@ -347,7 +385,7 @@ export default function IntegratedPortfolio(): JSX.Element {
               <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 md:col-span-2">
                 <div>
                   <div className="flex justify-between items-start"><div className="flex items-center gap-3"><h3 className="text-xl font-bold text-white tracking-tight">AI Blog Writer</h3></div><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
-                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An autonomous artificial intelligence platform engineered to parse text data streams and build technical layout layouts seamlessly.</p>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An autonomous artificial intelligence platform engineered to parse text data streams and build technical layouts seamlessly.</p>
                 </div>
                 <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-6 py-2.5 rounded-xl text-center shadow-md shadow-purple-600/10 transition-all block">Launch AI Writer Engine 🚀</a>
               </div>
@@ -357,4 +395,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-                      }
+                                                                                                                                            }
