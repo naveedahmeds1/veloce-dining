@@ -52,7 +52,6 @@ const MENU_ITEMS = [
   { id: 'm3', name: 'Saffron Infused Risotto Sphere', category: 'Main', price: 29.00, tag: 'CHEF SPECIAL', image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=500&q=80" },
   { id: 'm4', name: 'Artisanal Matcha Espresso Tart', category: 'Desserts', price: 12.00, tag: '', image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" },
 ];
-
 export default function IntegratedPortfolio(): JSX.Element {
   const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
   const [diningTab, setDiningTab] = useState<'home' | 'menu' | 'reservation' | 'tracking' | 'events'>('home');
@@ -94,6 +93,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       setTerminalLogs(["Connecting to global infrastructure telemetry secure layers...", "Handshake validation cleared via Frankfurt-4 Node Core..."]);
       const phrases = ["Hardware node serialization key parsed.", "Secure transaction hash submitted to main terminal network.", "Autonomous vector courier cleared for drone pad takeoff.", "Laser path trajectory initialized. Delivery ETA: Imminent."];
       const timers = phrases.map((phrase, index) => setTimeout(() => setTerminalLogs(prev => [...prev, phrase]), (index + 1) * 1200));
+    
       return () => timers.forEach(clearTimeout);
     }
   }, [activeApp, ecomTab]);
@@ -110,6 +110,7 @@ export default function IntegratedPortfolio(): JSX.Element {
   }, [diningTrackingActive]);
 
   const filteredDining = diningFilter === 'All' ? MENU_ITEMS : MENU_ITEMS.filter(item => item.category === diningFilter);
+
   return (
     <div className="min-h-screen bg-black text-white relative font-sans antialiased text-left selection:bg-zinc-800">
       {notification && (
@@ -118,8 +119,7 @@ export default function IntegratedPortfolio(): JSX.Element {
           <span>{notification}</span>
         </div>
       )}
-
-      {/* ================= VELOCE DINING SUITE PLATFORM ================= */}
+      1{/* ================= VELOCE DINING SUITE PLATFORM ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
@@ -138,7 +138,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 <div className="relative h-[420px] rounded-[2.5rem] overflow-hidden bg-cover bg-center flex items-center p-8 sm:p-12 border border-zinc-900" style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80')` }}>
                   <div className="max-w-xl space-y-4">
                     <span className="text-purple-400 font-mono text-[10px] tracking-widest uppercase bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">Autonomous Restaurant Framework</span>
-                    <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">Culinary Excellence. <br />Routed at Light Speed.</h1>
+                    <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">Culinary Excellence.<br />Routed at Light Speed.</h1>
                     <p className="text-zinc-400 text-sm font-light leading-relaxed">Experience a state-of-the-art interactive digital lounge mapping dynamic molecular dishes with automated secure logistic delivery trackers.</p>
                     <div className="pt-4 flex gap-3"><button onClick={() => setDiningTab('menu')} className="bg-white hover:bg-zinc-200 text-black font-semibold text-xs px-5 py-3 rounded-xl transition-all">Explore Smart Menu</button><button onClick={() => setDiningTab('reservation')} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs px-5 py-3 rounded-xl font-medium transition-all">Book Secure Table</button></div>
                   </div>
@@ -180,7 +180,9 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
                 <div className="bg-zinc-900/20 border border-zinc-900 rounded-[2rem] p-6 h-fit font-mono">
                   <div className="flex justify-between items-center mb-4 pb-2 border-b border-zinc-900"><h3 className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">// Transaction Queue</h3><span className="text-[10px] bg-zinc-900 px-2.5 py-0.5 rounded text-purple-400 border border-zinc-800">{diningManifest.length} Items</span></div>
-                  {diningManifest.length === 0 && !diningTrackingActive ? (<p className="text-center py-8 text-[10px] text-zinc-600">Manifest Queue Empty. Awaiting allocation parameters...</p>) : (
+                  {diningManifest.length === 0 && !diningTrackingActive ? (
+                    <p className="text-center py-8 text-[10px] text-zinc-600">Manifest Queue Empty. Awaiting allocation parameters...</p>
+                  ) : (
                     <div className="space-y-2 max-h-[220px] overflow-y-auto mb-4 text-xs text-zinc-400 pr-1">
                       {diningManifest.map((itm, idx) => (<div key={idx} className="flex justify-between items-center bg-black/40 p-2.5 rounded-xl border border-zinc-900"><span>&gt; {itm.name}</span><span className="text-purple-400 font-bold">${itm.price.toFixed(2)}</span></div>))}
                     </div>
@@ -191,7 +193,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
               </div>
             )}
-            {/* VIEW 3: SMART TABLE RESERVATION CONCIERGE */}
+
             {diningTab === 'reservation' && (
               <div className="max-w-md mx-auto bg-zinc-900/30 border border-zinc-900 rounded-[2rem] p-8 shadow-2xl animate-fadeIn">
                 <div className="mb-6"><h2 className="text-xl font-bold text-white tracking-tight">Concierge Table Allocation</h2><p className="text-xs text-zinc-500 mt-1">Acquire secure network parameters for spatial room validation.</p></div>
@@ -211,7 +213,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* VIEW 4: LIVE COURIER TELEMETRY PIPELINE */}
             {diningTab === 'tracking' && (
               <div className="max-w-xl mx-auto space-y-6 animate-fadeIn">
                 <div className="bg-zinc-900/30 border border-zinc-900 rounded-[2rem] p-6 font-mono text-xs">
@@ -227,7 +228,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* VIEW 5: CORPORATE EVENTS & PRIVATE LOUNGES */}
             {diningTab === 'events' && (
               <div className="grid md:grid-cols-2 gap-8 animate-fadeIn">
                 <div className="bg-zinc-900/20 border border-zinc-900 rounded-[2.5rem] overflow-hidden p-6 flex flex-col justify-between border-b-4 border-b-purple-600/30">
@@ -251,7 +251,6 @@ export default function IntegratedPortfolio(): JSX.Element {
           </main>
         </div>
       )}
-
       {/* ================= APEX MATRIX LUXURY STOREFRONT PLATFORM ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans">
@@ -342,11 +341,11 @@ export default function IntegratedPortfolio(): JSX.Element {
           </main>
         </div>
       )}
-
       {/* ================= MAIN PORTFOLIO DECK LAYOUT ================= */}
       {activeApp === 'portfolio' && (
         <main className="max-w-4xl mx-auto px-6 py-12">
           <nav className="flex justify-between items-center mb-24 border-b border-zinc-800/50 pb-6"><span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent tracking-tight">Naveed.dev</span><span className="px-4 py-1.5 text-xs font-semibold rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400">Available for Hire</span></nav>
+          
           <section className="mb-24 animate-fadeIn">
             <span className="text-xs font-semibold tracking-widest text-purple-400 uppercase bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Expert Custom Code & Core Architect</span>
             <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">I craft high-performance <br /><span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">digital experiences.</span></h1>
@@ -376,10 +375,10 @@ export default function IntegratedPortfolio(): JSX.Element {
 
               <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
-                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Apex Matrix Storefront</h3><span className="text-[10px] font-mono bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
+                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Apex Combo Store</h3><span className="text-[10px] font-mono bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
                   <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An ultra-premium, high-end B2B enterprise hardware storefront and automated logistics telemetry dashboard. Built explicitly to showcase elite asset procurement grids.</p>
                 </div>
-                <button onClick={() => { handleNavigation('ecommerce'); setEcomTab('shop'); }} className="w-fit bg-white text-black text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-zinc-200 transition-all">Launch Enterprise Portal →</button>
+                <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-white text-black text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-zinc-200 transition-all block text-center">Launch Enterprise Portal →</a>
               </div>
 
               <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 md:col-span-2">
@@ -395,4 +394,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-                                        }
+}
