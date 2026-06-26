@@ -119,7 +119,7 @@ export default function IntegratedPortfolio(): JSX.Element {
           <span>{notification}</span>
         </div>
       )}
-      1{/* ================= VELOCE DINING SUITE PLATFORM ================= */}
+      {/* ================= VELOCE DINING SUITE PLATFORM ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
@@ -250,7 +250,7 @@ export default function IntegratedPortfolio(): JSX.Element {
             )}
           </main>
         </div>
-      )}
+      )}1
       {/* ================= APEX MATRIX LUXURY STOREFRONT PLATFORM ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans">
@@ -365,6 +365,8 @@ export default function IntegratedPortfolio(): JSX.Element {
           <section className="mb-32">
             <h2 className="text-2xl font-bold text-zinc-100 mb-10 tracking-tight flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-purple-500 inline-block animate-pulse"></span>Featured Production Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              {/* CARD 1: VELOCE DINING SYSTEMS */}
               <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Veloce Dining Systems</h3><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">LIVE SIMULATION</span></div>
@@ -373,25 +375,37 @@ export default function IntegratedPortfolio(): JSX.Element {
                 <button onClick={() => { handleNavigation('dining'); setDiningTab('home'); setDiningTrackingActive(false); }} className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-purple-400 transition-all">Launch Console App →</button>
               </div>
 
+              {/* CARD 2: APEX MATRIX STOREFRONT (INTERNAL APPLICATION) */}
+              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 group">
+                <div>
+                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Apex Matrix Storefront</h3><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An ultra-premium, high-end B2B enterprise hardware storefront and automated logistics telemetry dashboard. Built explicitly to showcase elite asset procurement grids.</p>
+                </div>
+                <button onClick={() => { handleNavigation('ecommerce'); setEcomTab('shop'); }} className="w-fit bg-white text-black text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-zinc-200 transition-all">Launch Console App →</button>
+              </div>
+
+              {/* CARD 3: APEX COMBO STORE (EXTERNAL LINK FROM SCREENSHOT) */}
               <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">Apex Combo Store</h3><span className="text-[10px] font-mono bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
-                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An ultra-premium, high-end B2B enterprise hardware storefront and automated logistics telemetry dashboard. Built explicitly to showcase elite asset procurement grids.</p>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Premium Live Searching & Dynamic Category Filtering Demo dashboard. Phone setup easily allows real-time modifications directly via static local arrays.</p>
                 </div>
-                <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-white text-black text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-zinc-200 transition-all block text-center">Launch Enterprise Portal →</a>
+                <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-blue-400 text-center transition-all block">Launch Enterprise Portal →</a>
               </div>
 
-              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 md:col-span-2">
+              {/* CARD 4: AI BLOG WRITER */}
+              <div className="p-6 sm:p-8 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-purple-500/30 transition-all flex flex-col justify-between gap-6 group">
                 <div>
-                  <div className="flex justify-between items-start"><div className="flex items-center gap-3"><h3 className="text-xl font-bold text-white tracking-tight">AI Blog Writer</h3></div><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
+                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight">AI Blog Writer</h3><span className="text-[10px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
                   <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An autonomous artificial intelligence platform engineered to parse text data streams and build technical layouts seamlessly.</p>
                 </div>
                 <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-6 py-2.5 rounded-xl text-center shadow-md shadow-purple-600/10 transition-all block">Launch AI Writer Engine 🚀</a>
               </div>
+
             </div>
           </section>
         </main>
       )}
     </div>
   );
-}
+              }
