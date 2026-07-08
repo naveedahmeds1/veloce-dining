@@ -201,7 +201,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     ))}
                   </div>
                 </div>
-                <div className="backdrop-blur-xl bg-zinc-900/40 border border-zinc-900 rounded-[2rem] p-6 h-fit font-mono shadow-2xl">
+                <div className="backdrop-blur-xl bg-zinc-900/40 border border-zinc-900  rounded-[2rem] p-6 h-fit font-mono shadow-2xl">
                   <div className="flex justify-between items-center mb-4 pb-2 border-b border-zinc-900"><h3 className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">// Transaction Queue</h3><span className="text-[10px] bg-zinc-900 px-2.5 py-0.5 rounded text-yellow-500 border border-zinc-800">{diningManifest.length} Items</span></div>
                   {diningManifest.length === 0 && !diningTrackingActive ? (
                     <p className="text-center py-8 text-[10px] text-zinc-600">Manifest Queue Empty. Awaiting allocation parameters...</p>
@@ -242,7 +242,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                   <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
                   <div className="space-y-2.5 bg-black/60 p-4 rounded-xl border border-zinc-900 max-h-[220px] overflow-y-auto text-zinc-400">
                     {diningLogs.length === 0 ? <p className="text-zinc-600 text-[11px] text-center py-4">No data package active in pipeline. Initialize checkout on menu page first.</p> : diningLogs.map((log, index) => (<p key={index}>&gt; [TRAFFIC-LOG] {log}</p>))}
-                    {diningTrackingActive && <div className="w-1.5 h-3.5 bg-yellow-500 animate-pulse inline-block align-middle"></div>}
+                    {diningTrackingActive && <div && <div className="w-1.5 h-3.5 bg-yellow-500 animate-pulse inline-block align-middle"></div>}
                   </div>
                 </div>
                 <div className="w-full bg-zinc-900/30 border border-zinc-900 p-4 rounded-2xl shadow-xl">
@@ -278,6 +278,7 @@ export default function IntegratedPortfolio(): JSX.Element {
           </main>
         </div>
       )}
+
       {/* ================= APEX MATRIX LUXURY STOREFRONT PLATFORM ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans relative z-10 animate-fadeIn">
@@ -341,6 +342,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </form>
               </div>
             )}
+
             {ecomTab === 'tracking' && (
               <div className="max-w-xl mx-auto space-y-6">
                 <div className="flex items-center justify-between mb-2 px-1">
@@ -398,7 +400,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                   <h3 className="text-sm font-bold text-zinc-100 tracking-wide">// Git Lifecycle Framework & Production Repos</h3>
                   <p className="text-[10px] text-zinc-500 mt-0.5">Automated compilation logic audits & source deployment pipelines</p>
                 </div>
-              </div>
+                </div>
               <span className="text-[9px] font-bold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-1 rounded-full">CONNECTED & COMPLIANT</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-zinc-400">
@@ -416,6 +418,7 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             </div>
           </section>
+          
           <section className="mb-32 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               { icon: "✦", title: "Next-Gen App Router Ecosystems", desc: "Developing heavy server components layouts, asynchronous data loading hooks, and advanced responsive views." },
@@ -472,4 +475,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-            }
+                }
