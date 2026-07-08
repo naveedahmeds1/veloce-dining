@@ -34,8 +34,8 @@ const MENU_ITEMS = [
 ];
 
 export default function IntegratedPortfolio(): JSX.Element {
-  // Direct landing set to 'dining' so it shows Veloce right away
-  const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('dining');
+  // SET TO PORTFOLIO FIRST - As per your requirement
+  const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
   const [diningTab, setDiningTab] = useState<'home' | 'menu' | 'reservation' | 'tracking' | 'events'>('home');
   const [diningFilter, setDiningFilter] = useState<string>('All');
   const [diningManifest, setDiningManifest] = useState<{ id: string; name: string; price: number }[]>([]);
@@ -52,6 +52,8 @@ export default function IntegratedPortfolio(): JSX.Element {
     const handlePopState = (event: PopStateEvent) => {
       if (event.state && event.state.app) {
         setActiveApp(event.state.app);
+      } else {
+        setActiveApp('portfolio');
       }
     };
     window.addEventListener('popstate', handlePopState);
@@ -92,18 +94,18 @@ export default function IntegratedPortfolio(): JSX.Element {
 
   return (
     <div className="min-h-screen bg-[#030712] text-white relative font-sans antialiased text-left selection:bg-zinc-800">
-      {/* Background Ambience Shadows */}
+      {/* Background Ambience Luxury Shadows */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-yellow-500/5 to-transparent rounded-full blur-[120px] pointer-events-none z-0"></div>
       <div className="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-t from-yellow-500/5 to-transparent rounded-full blur-[150px] pointer-events-none z-0"></div>
 
       {notification && (
-        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/90 backdrop-blur-xl border border-zinc-800 text-white px-6 py-3 rounded-full text-xs font-medium tracking-wide shadow-2xl flex items-center gap-3 transition-all">
+        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/90 backdrop-blur-xl border border-zinc-800 text-white px-6 py-3 rounded-full text-xs font-medium tracking-wide shadow-2xl flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
           <span>{notification}</span>
         </div>
       )}
 
-      {/* ================= VELOCE DINING SUITE PLATFORM (GOLD UPGRADED) ================= */}
+      {/* ================= VELOCE DINING SUITE PLATFORM (PREMIUM GOLD EDITION) ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
@@ -368,7 +370,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               Specializing in building bulletproof, optimized, and bespoke web interfaces using <strong>Next.js / React</strong>, <strong>Tailwind CSS</strong>, and clean, enterprise-grade architecture paradigms managed through continuous version control tracking.
             </p>
           </section>
-
           {/* === UPGRADED GITHUB TELEMETRY FRAMEWORK SECTION === */}
           <section className="mb-24 bg-gradient-to-r from-zinc-950 to-zinc-900/50 backdrop-blur-xl border border-zinc-800/80 hover:border-yellow-500/30 p-6 sm:p-8 rounded-3xl shadow-2xl transition-all duration-300 font-mono">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-900">
@@ -411,7 +412,7 @@ export default function IntegratedPortfolio(): JSX.Element {
             <h2 className="text-2xl font-bold text-zinc-100 mb-10 tracking-tight flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 inline-block animate-pulse"></span>Featured Production Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
-              {/* CARD 1: VELOCE DINING SYSTEMS */}
+              {/* CARD 1: VELOCE DINING SYSTEMS (GOLD UPGRADED INNER APP) */}
               <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Systems</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">LIVE SIMULATION</span></div>
@@ -437,7 +438,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
                 <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 text-center transition-all block shadow-md">Launch Enterprise Portal →</a>
               </div>
-
               {/* CARD 4: AI BLOG WRITER */}
               <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                 <div>
@@ -453,4 +453,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-          }
+}
