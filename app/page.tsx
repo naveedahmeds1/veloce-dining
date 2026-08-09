@@ -220,7 +220,8 @@ export default function IntegratedPortfolio(): JSX.Element {
             {diningTab === 'tracking' && (
               <div className="max-w-xl mx-auto space-y-6">
                 <div className="bg-zinc-900/40 border border-zinc-900 backdrop-blur-xl rounded-[2rem] p-6 font-mono text-xs shadow-2xl">
-                  <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
+                  <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2">
+<span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
                   <div className="space-y-2.5 bg-black/60 p-4 rounded-xl border border-zinc-900 max-h-[220px] overflow-y-auto text-zinc-400">
                     {diningLogs.length === 0 ? <p className="text-zinc-600 text-[11px] text-center py-4">No data package active in pipeline. Initialize checkout on menu page first.</p> : diningLogs.map((log, index) => (<p key={index}>&gt; [TRAFFIC-LOG] {log}</p>))}
                     {diningTrackingActive && <div className="w-1.5 h-3.5 bg-yellow-500 animate-pulse inline-block align-middle"></div>}
@@ -308,6 +309,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
               </div>
             )}
+
             {ecomTab === 'checkout' && (
               <div className="max-w-md mx-auto bg-zinc-950 border border-zinc-900 rounded-[2.5rem] p-8 shadow-2xl">
                 <div className="mb-8">
@@ -351,9 +353,30 @@ export default function IntegratedPortfolio(): JSX.Element {
       {/* ================= MAIN PORTFOLIO DECK LAYOUT ================= */}
       {activeApp === 'portfolio' && (
         <main className="max-w-4xl mx-auto px-6 py-12 relative z-10">
-          <nav className="flex justify-between items-center mb-24 border-b border-zinc-900 pb-6">
+          <nav className="flex flex-wrap justify-between items-center gap-4 mb-24 border-b border-zinc-900 pb-6">
             <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent tracking-tight font-mono">Naveed.engine</span>
-            <span className="px-4 py-1.5 text-xs font-semibold rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 text-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.05)] animate-pulse">● Available for Enterprise Hire</span>
+            
+            {/* === UPDATED CONTACT LINKS (WHATSAPP & EMAIL) === */}
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://wa.me/923103273904" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 py-1.5 text-xs font-semibold rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 text-zinc-300 hover:text-emerald-400 hover:border-emerald-500/50 shadow-md transition-all duration-300 flex items-center gap-2 overflow-hidden"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse group-hover:scale-125 transition-transform"></span>
+                <span>💬 WhatsApp</span>
+              </a>
+              <a 
+                href="mailto:na0953237@gmail.com" 
+                className="group relative px-4 py-1.5 text-xs font-semibold rounded-full bg-yellow-500/10 backdrop-blur-md border border-yellow-500/20 text-yellow-500 hover:bg-yellow-500 hover:text-black shadow-[0_0_15px_rgba(234,179,8,0.08)] transition-all duration-300 flex items-center gap-2"
+              >
+                <span>✉️ Email Me</span>
+              </a>
+              <span className="hidden sm:inline-flex px-3 py-1.5 text-[10px] font-mono rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold uppercase tracking-wider">
+                ● Available
+              </span>
+            </div>
           </nav>
           
           <section className="mb-24">
@@ -370,7 +393,8 @@ export default function IntegratedPortfolio(): JSX.Element {
               Specializing in building bulletproof, optimized, and bespoke web interfaces using <strong>Next.js / React</strong>, <strong>Tailwind CSS</strong>, and clean, enterprise-grade architecture paradigms managed through continuous version control tracking.
             </p>
           </section>
-          {/* === UPGRADED GITHUB TELEMETRY FRAMEWORK SECTION === */}
+
+          {/* === GITHUB TELEMETRY FRAMEWORK SECTION === */}
           <section className="mb-24 bg-gradient-to-r from-zinc-950 to-zinc-900/50 backdrop-blur-xl border border-zinc-800/80 hover:border-yellow-500/30 p-6 sm:p-8 rounded-3xl shadow-2xl transition-all duration-300 font-mono">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-900">
               <div className="flex items-center gap-3">
@@ -412,7 +436,7 @@ export default function IntegratedPortfolio(): JSX.Element {
             <h2 className="text-2xl font-bold text-zinc-100 mb-10 tracking-tight flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 inline-block animate-pulse"></span>Featured Production Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
-              {/* CARD 1: VELOCE DINING SYSTEMS (GOLD UPGRADED INNER APP) */}
+              {/* CARD 1: VELOCE DINING SYSTEMS */}
               <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                 <div>
                   <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Systems</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">LIVE SIMULATION</span></div>
@@ -438,13 +462,14 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
                 <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 text-center transition-all block shadow-md">Launch Enterprise Portal →</a>
               </div>
-              {/* CARD 4: AI BLOG WRITER */}
+
+              {/* CARD 4: VELOCE DINING PORTFOLIO LINK */}
               <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                 <div>
-                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">AI Blog Writer</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
-                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">An autonomous artificial intelligence platform engineered to parse text data streams and build technical layouts seamlessly.</p>
+                  <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Live Platform</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">DEPLOYED PLATFORM</span></div>
+                  <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Production live environment deployed on Vercel infrastructure with zero latency routing and responsive UX assets.</p>
                 </div>
-                <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-6 py-2.5 rounded-xl text-center shadow-lg shadow-yellow-500/10 transition-all block">Launch AI Writer Engine 🚀</a>
+                <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-6 py-2.5 rounded-xl text-center shadow-lg shadow-yellow-500/10 transition-all block">Launch Live Platform 🚀</a>
               </div>
 
             </div>
@@ -453,4 +478,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-}
+                }
