@@ -185,129 +185,9 @@ export default function IntegratedPortfolio() {
         </div>
       )}
 
-      {/* ================= 1. VELOCE DINING INTERNATIONAL RESTAURANT CONSOLE ================= */}
-      {activeApp === 'dining' && (
-        <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
-          <header className="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-zinc-900 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-            <button 
-              onClick={() => setActiveApp('portfolio')} 
-              className="text-xs font-bold text-yellow-500 hover:text-yellow-400 flex items-center gap-2 bg-yellow-500/10 px-4 py-2 rounded-xl border border-yellow-500/20 transition-all"
-            >
-              ← Back To Portfolio Deck
-            </button>
-            
-            <nav className="flex items-center space-x-1 bg-zinc-900 p-1.5 rounded-xl border border-zinc-800">
-              {(['home', 'menu', 'reservation', 'tracking'] as const).map((tab) => (
-                <button 
-                  key={tab} 
-                  onClick={() => setDiningTab(tab)} 
-                  className={`px-4 py-1.5 rounded-lg text-xs capitalize transition-all ${diningTab === tab ? 'bg-yellow-500 text-black font-bold' : 'text-zinc-400 hover:text-white'}`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </nav>
-
-            <div className="flex items-center gap-3">
-              <a 
-                href="https://veloce-dining.vercel.app" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-[10px] bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-3.5 py-1.5 rounded-xl transition-all"
-              >
-                Live Vercel Host 🚀
-              </a>
-            </div>
-          </header>
-
-          <main className="max-w-5xl mx-auto px-6 py-12 relative z-10">
-            {diningTab === 'home' && (
-              <div className="space-y-8 text-center max-w-3xl mx-auto py-12">
-                <span className="text-yellow-500 font-mono text-xs uppercase tracking-widest bg-yellow-500/10 px-4 py-1.5 rounded-full border border-yellow-500/20">
-                  Luxury Dining & Hospitality Platform
-                </span>
-                <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                  Veloce Enterprise <br />
-                  <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                    Interactive Concierge
-                  </span>
-                </h1>
-                <p className="text-zinc-400 text-sm max-w-xl mx-auto font-light leading-relaxed">
-                  Engineered with real-time dynamic menu routing, instant seat reservations, multi-currency support, and zero-latency order telemetry.
-                </p>
-                <div className="flex justify-center gap-4 pt-4">
-                  <button onClick={() => setDiningTab('menu')} className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs px-8 py-3.5 rounded-xl transition-all shadow-lg">
-                    Explore Interactive Menu
-                  </button>
-                  <button onClick={() => setDiningTab('reservation')} className="bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-white text-xs font-semibold px-8 py-3.5 rounded-xl transition-all">
-                    Book VIP Table
-                  </button>
-                </div>
-              </div>
             )}
 
-            {diningTab === 'menu' && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6">
-                  <div className="flex flex-wrap items-center justify-between bg-zinc-900/60 p-4 rounded-2xl border border-zinc-800 gap-4">
-                    <h2 className="text-base font-bold text-white">Smart Menu Engine</h2>
-                    <div className="flex gap-1.5">
-                      {['All', 'Main', 'Starters', 'Desserts'].map((cat) => (
-                        <button 
-                          key={cat} 
-                          onClick={() => setDiningFilter(cat)} 
-                          className={`px-3 py-1 rounded-lg text-xs transition-all ${diningFilter === cat ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-800 text-zinc-400'}`}
-                        >
-                          {cat}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {filteredDining.map((item) => (
-                      <div key={item.id} className="bg-zinc-900/40 border border-zinc-800 p-5 rounded-2xl flex flex-col justify-between space-y-4 hover:border-yellow-500/30 transition-all">
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-start">
-                            <h3 className="text-sm font-bold text-white">{item.name}</h3>
-                            <span className="text-[9px] font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2 py-0.5 rounded">{item.tag}</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-zinc-500 uppercase block">{item.category}</span>
-                        </div>
-                        <div className="flex justify-between items-center pt-3 border-t border-zinc-800/80">
-                          <span className="text-sm font-mono font-bold text-yellow-400">{formatPrice(item.priceUSD)}</span>
-                          <button 
-                            onClick={() => {
-                              setDiningManifest([...diningManifest, { id: Date.now().toString(), name: item.name, priceUSD: item.priceUSD }]);
-                              triggerNotification(`${item.name} added to cart`);
-                            }} 
-                            className="bg-zinc-800 hover:bg-yellow-500 hover:text-black text-zinc-200 text-xs font-semibold px-3 py-1.5 rounded-lg border border-zinc-700 transition-all"
-                          >
-                            + Add Item
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-zinc-900/60 border border-zinc-800 p-6 rounded-2xl font-mono space-y-4 h-fit sticky top-24">
-                  <h3 className="text-xs font-bold uppercase text-zinc-400 border-b border-zinc-800 pb-3">Order Manifest ({diningManifest.length})</h3>
-                  {diningManifest.length === 0 ? (
-                    <p className="text-xs text-zinc-600 py-6 text-center">No luxury items added yet.</p>
-                  ) : (
-                    <div className="space-y-2.5 text-xs text-zinc-300 max-h-60 overflow-y-auto pr-1">
-                      {diningManifest.map((itm, idx) => (
-                        <div key={idx} className="flex justify-between bg-black/40 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span>{itm.name}</span>
-                          <span className="text-yellow-400 font-bold">{formatPrice(itm.priceUSD)}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {diningManifest.length > 0 && (
-                    <div className="pt-2 border-t border-zinc-800 space-y-3">
+             800 space-y-3">
                       <div className="flex justify-between text-xs font-bold text-white">
                         <span>Total:</span>
                         <span className="text-yellow-400">{formatPrice(diningManifest.reduce((acc, curr) => acc + curr.priceUSD, 0))}</span>
@@ -329,58 +209,161 @@ export default function IntegratedPortfolio() {
               </div>
             )}
 
-            {diningTab === 'reservation' && (
-              <div className="max-w-lg mx-auto bg-zinc-900/60 border border-zinc-800 p-8 rounded-3xl space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white">VIP Table Booking</h3>
-                  <p className="text-xs text-zinc-400 mt-1">Reserve private dining lounge seats with instant confirmation.</p>
+
+      {/* ================= VELOCE DINING SUITE PLATFORM (PREMIUM GOLD EDITION) ================= */}
+      {activeApp === 'dining' && (
+        <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
+          <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">â† Back To Console Deck</button>
+            <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80">
+              {(['home', 'menu', 'reservation', 'tracking', 'events'] as const).map((tab) => (
+                <button key={tab} onClick={() => setDiningTab(tab)} className={`px-3 py-1.5 rounded-lg text-xs capitalize font-medium transition-all ${diningTab === tab ? 'bg-zinc-800 text-white border border-zinc-700/50 shadow' : 'text-zinc-500 hover:text-zinc-300'}`}>{tab}</button>
+              ))}
+            </nav>
+            <span className="text-[10px] bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded-full font-mono uppercase tracking-widest">Veloce Hub v3.0</span>
+          </header>
+
+          <main className="max-w-5xl mx-auto px-4 py-12 relative z-10">
+            {diningTab === 'home' && (
+              <div className="space-y-16">
+                <div className="relative h-[420px] rounded-[2.5rem] overflow-hidden bg-cover bg-center flex items-center p-8 sm:p-12 border border-zinc-900 shadow-2xl" style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80')` }}>
+                  <div className="max-w-xl space-y-4">
+                    <span className="text-yellow-500 font-mono text-[10px] tracking-widest uppercase bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-full">Autonomous Restaurant Framework</span>
+                    <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">Culinary Excellence.<br />Routed at Light Speed.</h1>
+                    <p className="text-zinc-400 text-sm font-light leading-relaxed">Experience a state-of-the-art interactive digital lounge mapping dynamic molecular dishes with automated secure logistic delivery trackers.</p>
+                    <div className="pt-4 flex gap-3">
+                      <button onClick={() => setDiningTab('menu')} className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold text-xs px-5 py-3 rounded-xl shadow-lg shadow-yellow-500/10 transition-all">Explore Smart Menu</button>
+                      <button onClick={() => setDiningTab('reservation')} className="backdrop-blur-md bg-zinc-900/60 hover:bg-zinc-800 border border-zinc-800 text-xs px-5 py-3 rounded-xl font-medium transition-all">Book Secure Table</button>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4 text-xs font-mono">
-                  <div>
-                    <label className="text-zinc-400 block mb-1">Guests Count</label>
-                    <select value={resGuests} onChange={(e) => setResGuests(Number(e.target.value))} className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-white">
-                      {[1, 2, 4, 6, 8, 12].map(num => <option key={num} value={num}>{num} Guests Lounge</option>)}
-                    </select>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-zinc-400 block mb-1">Date</label>
-                      <input type="date" value={resDate} onChange={(e) => setResDate(e.target.value)} className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-white" />
-                    </div>
-                    <div>
-                      <label className="text-zinc-400 block mb-1">Time Slot</label>
-                      <input type="time" value={resTime} onChange={(e) => setResTime(e.target.value)} className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-white" />
-                    </div>
-                  </div>
-                  <button 
-                    onClick={() => triggerNotification(`VIP Table Reserved for ${resGuests} Guests on ${resDate} at ${resTime}`)} 
-                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3.5 rounded-xl transition-all"
-                  >
-                    Confirm VIP Reservation
-                  </button>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {[
+                    { val: "12,400+", label: "Dispatched Telemetry" },
+                    { val: "99.8%", label: "Thermal Freshness Rate" },
+                    { val: "< 14 Mins", label: "Average Drone Vector" },
+                    { val: "4.9 Stars", label: "Client Execution Rating" }
+                  ].map((stat, i) => (
+                    <div key={i} className="backdrop-blur-xl bg-zinc-900/30 border border-zinc-900/60 p-5 rounded-2xl text-center shadow-lg"><h3 className="text-xl font-bold text-white font-mono">{stat.val}</h3><p className="text-[10px] text-zinc-500 uppercase mt-1 tracking-wider">{stat.label}</p></div>
+                  ))}
                 </div>
               </div>
             )}
 
-            {diningTab === 'tracking' && (
-              <div className="max-w-md mx-auto bg-zinc-900/60 border border-zinc-800 p-8 rounded-3xl font-mono space-y-6">
-                <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-                  <h4 className="text-xs font-bold uppercase text-yellow-400">// Live Order Telemetry</h4>
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            {diningTab === 'menu' && (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-6">
+                  <div className="flex items-center justify-between bg-zinc-900/40 backdrop-blur-md border border-zinc-900 p-4 rounded-2xl shadow-md">
+                    <div>
+                      <h2 className="text-xl font-bold tracking-tight">Interactive Menu Console</h2>
+                      <p className="text-xs text-zinc-500">Select dish logs to allocate variables to live manifest queue</p>
+                    </div>
+                    <div className="flex gap-1.5">
+                      {['All', 'Main', 'Starters', 'Desserts'].map((cat) => (
+                        <button key={cat} onClick={() => setDiningFilter(cat)} className={`px-2.5 py-1 rounded text-[11px] font-medium transition-all ${diningFilter === cat ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-900 border border-zinc-800 text-zinc-400'}`}>{cat}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {filteredDining.map((item) => (
+                      <div key={item.id} className="backdrop-blur-xl bg-zinc-900/20 border border-zinc-900 rounded-2xl overflow-hidden hover:border-yellow-500/30 hover:shadow-[0_0_25px_rgba(234,179,8,0.03)] transition-all duration-300 flex flex-col justify-between shadow-lg group">
+                        <div className="overflow-hidden h-40 w-full relative border-b border-zinc-900">
+                          <img src={item.image} alt={item.name} className="h-full w-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" />
+                        </div>
+                        <div className="p-4 flex-1 flex flex-col justify-between">
+                          <div>
+                            <div className="flex justify-between items-start gap-2">
+                              <h3 className="text-sm font-bold text-zinc-200 group-hover:text-yellow-400 transition-colors">{item.name}</h3>
+                              {item.tag && <span className="text-[7px] font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded-sm">{item.tag}</span>}
+                            </div>
+                            <span className="text-[9px] text-zinc-500 font-mono block mt-0.5 uppercase tracking-wider">{item.category}</span>
+                          </div>
+                          <div className="flex justify-between items-center mt-4 pt-3 border-t border-zinc-900/60">
+                            <span className="text-xs font-mono font-bold text-yellow-500">${item.price.toFixed(2)}</span>
+                            <button onClick={() => { setDiningManifest([...diningManifest, { id: Date.now().toString(), name: item.name, price: item.price }]); }} className="bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-[10px] font-medium px-2.5 py-1.5 rounded border border-zinc-800 transition-all">+ Add To Manifest</button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-3 text-xs text-zinc-300 bg-black/60 p-4 rounded-xl border border-zinc-800/80">
-                  {diningLogs.length === 0 ? (
-                    <p className="text-zinc-600 text-center py-4">No active telemetry stream.</p>
+                <div className="backdrop-blur-xl bg-zinc-900/30 border border-zinc-900 rounded-[2rem] p-6 h-fit font-mono shadow-2xl">
+                  <div className="flex justify-between items-center mb-4 pb-2 border-b border-zinc-900"><h3 className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">// Transaction Queue</h3><span className="text-[10px] bg-zinc-900 px-2.5 py-0.5 rounded text-yellow-500 border border-zinc-800">{diningManifest.length} Items</span></div>
+                  {diningManifest.length === 0 && !diningTrackingActive ? (
+                    <p className="text-center py-8 text-[10px] text-zinc-600">Manifest Queue Empty. Awaiting allocation parameters...</p>
                   ) : (
-                    diningLogs.map((log, i) => <p key={i} className="leading-relaxed">&gt; {log}</p>)
+                    <div className="space-y-2 max-h-[220px] overflow-y-auto mb-4 text-xs text-zinc-400 pr-1">
+                      {diningManifest.map((itm, idx) => (<div key={idx} className="flex justify-between items-center bg-black/40 p-2.5 rounded-xl border border-zinc-900"><span>&gt; {itm.name}</span><span className="text-yellow-500 font-bold">${itm.price.toFixed(2)}</span></div>))}
+                    </div>
                   )}
+                  {diningManifest.length > 0 && (
+                    <button onClick={() => { triggerNotification("ðŸš€ Secure Routing Protocol Initialized! Pipeline Tracking active."); setDiningTrackingActive(true); setDiningTab('tracking'); setDiningManifest([]); }} className="w-full bg-yellow-500 hover:bg-yellow-400 text-black text-[10px] font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-yellow-500/10">Initialize Secure Checkout</button>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {diningTab === 'reservation' && (
+              <div className="max-w-md mx-auto bg-zinc-900/30 border border-zinc-900 backdrop-blur-xl rounded-[2rem] p-8 shadow-2xl">
+                <div className="mb-6"><h2 className="text-xl font-bold text-white tracking-tight">Concierge Table Allocation</h2><p className="text-xs text-zinc-500 mt-1">Acquire secure network parameters for spatial room validation.</p></div>
+                <form onSubmit={(e) => { e.preventDefault(); triggerNotification("ðŸŽ¯ Table Reservation Blocked & Cleared Successfully!"); setDiningTab('home'); }} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <input type="date" required className="w-full bg-black border border-zinc-900 focus:border-yellow-500/40 rounded-xl px-4 py-3 text-xs text-zinc-300 focus:outline-none" value={formData.date} onChange={(e) => setFormData({...formData, date: e.target.value})} />
+                    <input type="time" required className="w-full bg-black border border-zinc-900 focus:border-yellow-500/40 rounded-xl px-4 py-3 text-xs text-zinc-300 focus:outline-none" value={formData.time} onChange={(e) => setFormData({...formData, time: e.target.value})} />
+                  </div>
+                  <select className="w-full bg-black border border-zinc-900 focus:border-yellow-500/40 rounded-xl px-4 py-3 text-xs text-zinc-300 focus:outline-none font-mono" value={formData.guests} onChange={(e) => setFormData({...formData, guests: e.target.value})}>
+                    <option value="2">2 Allocation Nodes (Guests)</option>
+                    <option value="4">4 Allocation Nodes (Guests)</option>
+                    <option value="8">8 Enterprise Lounge Pack</option>
+                  </select>
+                  <input type="text" required placeholder="Authorized Client Name" className="w-full bg-black border border-zinc-900 focus:border-yellow-500/40 rounded-xl px-4 py-3 text-xs text-zinc-300 focus:outline-none" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                  <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs py-3.5 rounded-xl mt-2 shadow-xl shadow-yellow-500/5 transition-all">Authorize Spatial Table</button>
+                </form>
+              </div>
+            )}
+
+            {diningTab === 'tracking' && (
+              <div className="max-w-xl mx-auto space-y-6">
+                <div className="bg-zinc-900/40 border border-zinc-900 backdrop-blur-xl rounded-[2rem] p-6 font-mono text-xs shadow-2xl">
+                  <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
+                  <div className="space-y-2.5 bg-black/60 p-4 rounded-xl border border-zinc-900 max-h-[220px] overflow-y-auto text-zinc-400">
+                    {diningLogs.length === 0 ? <p className="text-zinc-600 text-[11px] text-center py-4">No data package active in pipeline. Initialize checkout on menu page first.</p> : diningLogs.map((log, index) => (<p key={index}>&gt; [TRAFFIC-LOG] {log}</p>))}
+                    {diningTrackingActive && <div className="w-1.5 h-3.5 bg-yellow-500 animate-pulse inline-block align-middle"></div>}
+                  </div>
+                </div>
+                <div className="w-full bg-zinc-900/30 border border-zinc-900 p-4 rounded-2xl shadow-xl">
+                  <iframe title="Map Core" width="100%" height="220" frameBorder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=66.9000%2C24.8000%2C67.1000%2C24.9500&amp;layer=mapnik" className="opacity-30 invert-[0.92] hue-rotate-[180deg] saturate-[0.3] border-0 rounded-xl" />
+                </div>
+              </div>
+            )}
+
+            {diningTab === 'events' && (
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-zinc-900/20 backdrop-blur-xl border border-zinc-900 rounded-[2.5rem] overflow-hidden p-6 flex flex-col justify-between border-b-4 border-b-yellow-500/20 shadow-xl group">
+                  <div>
+                    <div className="overflow-hidden rounded-2xl mb-4 h-44">
+                      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" alt="Private Banquet" className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Quantum Corporate Banquets</h3>
+                    <p className="text-xs text-zinc-400 mt-2 leading-relaxed font-light">Custom spatial architecture mappings configured for enterprise teams, high-profile product announcements, and modular tech networks dinners.</p>
+                  </div>
+                  <button onClick={() => triggerNotification("ðŸ“¬ Event Query Logged. Corporate relations manager will uplink.")} className="w-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-[10px] font-bold py-3 rounded-xl border border-zinc-800 mt-6 uppercase tracking-wider transition-all">Request Allocation Brief</button>
+                </div>
+                <div className="bg-zinc-900/20 backdrop-blur-xl border border-zinc-900 rounded-[2.5rem] overflow-hidden p-6 flex flex-col justify-between border-b-4 border-b-yellow-500/20 shadow-xl group">
+                  <div>
+                    <div className="overflow-hidden rounded-2xl mb-4 h-44">
+                      <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=600&q=80" alt="VIP Deck" className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">VIP High-Tier Secret Lounges</h3>
+                    <p className="text-xs text-zinc-400 mt-2 leading-relaxed font-light">Absolute isolated soundproof private spaces. Features high-end custom semantic menu curation layers and individual server node assignments.</p>
+                  </div>
+                  <button onClick={() => triggerNotification("ðŸ“¬ Event Query Logged. Corporate relations manager will uplink.")} className="w-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-[10px] font-bold py-3 rounded-xl border border-zinc-800 mt-6 uppercase tracking-wider transition-all">Request Allocation Brief</button>
                 </div>
               </div>
             )}
           </main>
         </div>
       )}
-
       {/* ================= 2. APEX COMBO E-COMMERCE CONSOLE ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-white font-sans relative z-10">
