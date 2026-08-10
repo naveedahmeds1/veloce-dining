@@ -52,7 +52,7 @@ const CASE_STUDIES = [
     tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "WebSockets"],
     problem: "Outdated legacy booking created delays during peak hours and lost high-value bookings.",
     solution: "Built an ultra-low-latency dynamic ordering engine with live table reservations and instant courier telemetry.",
-    liveUrl: "https://veloce-dining.vercel.app"
+
   },
   {
     id: "cs2",
@@ -210,6 +210,8 @@ export default function IntegratedPortfolio() {
             )}
 
 
+
+
       {/* ================= VELOCE DINING SUITE PLATFORM (PREMIUM GOLD EDITION) ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
@@ -364,6 +366,7 @@ export default function IntegratedPortfolio() {
           </main>
         </div>
       )}
+
       {/* ================= 2. APEX COMBO E-COMMERCE CONSOLE ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-white font-sans relative z-10">
