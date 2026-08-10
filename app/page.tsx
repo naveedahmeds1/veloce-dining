@@ -220,8 +220,7 @@ export default function IntegratedPortfolio(): JSX.Element {
             {diningTab === 'tracking' && (
               <div className="max-w-xl mx-auto space-y-6">
                 <div className="bg-zinc-900/40 border border-zinc-900 backdrop-blur-xl rounded-[2rem] p-6 font-mono text-xs shadow-2xl">
-                  <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2">
-<span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
+                  <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span><h4 className="text-[11px] uppercase font-bold tracking-wider text-zinc-400">Live Courier Tracking Pipeline</h4></div><span className="text-[9px] text-zinc-600 font-mono">SECURE LINK STATUS: ACTIVE</span></div>
                   <div className="space-y-2.5 bg-black/60 p-4 rounded-xl border border-zinc-900 max-h-[220px] overflow-y-auto text-zinc-400">
                     {diningLogs.length === 0 ? <p className="text-zinc-600 text-[11px] text-center py-4">No data package active in pipeline. Initialize checkout on menu page first.</p> : diningLogs.map((log, index) => (<p key={index}>&gt; [TRAFFIC-LOG] {log}</p>))}
                     {diningTrackingActive && <div className="w-1.5 h-3.5 bg-yellow-500 animate-pulse inline-block align-middle"></div>}
@@ -309,7 +308,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
               </div>
             )}
-
             {ecomTab === 'checkout' && (
               <div className="max-w-md mx-auto bg-zinc-950 border border-zinc-900 rounded-[2.5rem] p-8 shadow-2xl">
                 <div className="mb-8">
@@ -356,10 +354,10 @@ export default function IntegratedPortfolio(): JSX.Element {
           <nav className="flex flex-wrap justify-between items-center gap-4 mb-24 border-b border-zinc-900 pb-6">
             <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent tracking-tight font-mono">Naveed.engine</span>
             
-            {/* === UPDATED CONTACT LINKS (WHATSAPP & EMAIL) === */}
+            {/* === FIXED WHATSAPP & EMAIL LINK === */}
             <div className="flex items-center gap-3">
               <a 
-                href="https://wa.me/923103273904" 
+                href="https://api.whatsapp.com/send?phone=923103273904" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-4 py-1.5 text-xs font-semibold rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 text-zinc-300 hover:text-emerald-400 hover:border-emerald-500/50 shadow-md transition-all duration-300 flex items-center gap-2 overflow-hidden"
@@ -378,7 +376,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </span>
             </div>
           </nav>
-          
           <section className="mb-24">
             <span className="text-[10px] font-mono tracking-widest text-yellow-500 uppercase bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20 shadow-md">
               Senior Full-Stack Web Engineer
@@ -444,7 +441,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
                 <button onClick={() => { handleNavigation('dining'); setDiningTab('home'); setDiningTrackingActive(false); }} className="w-fit bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 shadow-md transition-all">Launch Console App →</button>
               </div>
-
               {/* CARD 2: APEX MATRIX STOREFRONT */}
               <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                 <div>
@@ -478,4 +474,4 @@ export default function IntegratedPortfolio(): JSX.Element {
       )}
     </div>
   );
-                }
+          }
