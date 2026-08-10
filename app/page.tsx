@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, JSX } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // === INTERNATIONAL MULTI-CURRENCY CONVERTOR ===
 type Currency = 'USD' | 'EUR' | 'GBP' | 'PKR';
+
 const CURRENCY_RATES: Record<Currency, { symbol: string; rate: number }> = {
   USD: { symbol: '$', rate: 1 },
   EUR: { symbol: '€', rate: 0.92 },
@@ -11,26 +12,26 @@ const CURRENCY_RATES: Record<Currency, { symbol: string; rate: number }> = {
   PKR: { symbol: 'Rs ', rate: 278 }
 };
 
-// === PREMIUM DATA LAYERS ===
+// === PREMIUM DATA LAYERS WITH HIGH-END LUXURY IMAGES ===
 const PREMIUM_PRODUCTS = [
   { 
     id: "p1", 
     name: "Apex Quantum Dropper v4", 
-    tagline: "High-frequency liquid routing module.", 
+    tagline: "The speed of light. Now enterprise grade.", 
     priceUSD: 1299, 
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80",
-    description: "Automated high-frequency liquidity router engineered for telemetry, encryption pipelines, and smooth execution matrices.", 
-    specs: ["Guaranteed High Network Uptime", "Low-Latency Custom Fiber Routing", "Multi-Layer Security Vault"], 
+    description: "Our most advanced automated high-frequency liquidity router. Engineered with surgical precision for flawless financial telemetry, quantum-safe data encryption pipelines, and zero-friction execution matrices.", 
+    specs: ["99.999% Guaranteed Network Uptime", "Zero-Latency Custom Fiber Routing Cluster", "Multi-Layer Silicon-Level Cryptographic Vault"], 
     badge: "Pro Edition" 
   },
   { 
     id: "p2", 
     name: "Matrix Core Node Pro", 
-    tagline: "Neural computing stack.", 
+    tagline: "Neural computing. Decentralized.", 
     priceUSD: 2450, 
     image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80",
-    description: "Liquid-cooled hardware computation stack built explicitly for deep learning arrays, neural nodes, and algorithmic clustering.", 
-    specs: ["High-Performance Neural Core", "Liquid-Cooled Enclosure", "Native API Gateway Integration"], 
+    description: "A liquid-cooled hardware computation stack built explicitly for deep learning arrays, local artificial intelligence neural nodes, and complex autonomous algorithmic clustering.", 
+    specs: ["High-Performance AI Neural Compute Core", "Liquid-Cooled Thermally Efficient Enclosure", "Native REST & WebSockets API Integration Gateway"], 
     badge: "Standard Drop" 
   }
 ];
@@ -50,7 +51,7 @@ const CASE_STUDIES = [
     client: "Veloce Group International",
     tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "WebSockets"],
     problem: "Outdated legacy booking created delays during peak hours and lost high-value bookings.",
-    solution: "Built a ultra-low-latency dynamic ordering engine with live table reservations and instant courier telemetry.",
+    solution: "Built an ultra-low-latency dynamic ordering engine with live table reservations and instant courier telemetry.",
     liveUrl: "https://veloce-dining.vercel.app"
   },
   {
@@ -102,8 +103,8 @@ const TESTIMONIALS = [
   }
 ];
 
-export default function IntegratedPortfolio(): JSX.Element {
-  // NAVIGATION & APPLICATION STATE
+export default function IntegratedPortfolio() {
+  // === ALL STATE DECLARATIONS ===
   const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
   const [activeTab, setActiveTab] = useState<'overview' | 'work' | 'custom_offer' | 'contact'>('overview');
   const [currency, setCurrency] = useState<Currency>('USD');
@@ -115,7 +116,7 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [diningLogs, setDiningLogs] = useState<string[]>([]);
   const [diningTrackingActive, setDiningTrackingActive] = useState<boolean>(false);
   
-  // RESERVATION STATE
+  // RESERVATION STATES
   const [resGuests, setResGuests] = useState<number>(2);
   const [resDate, setResDate] = useState<string>('2026-08-15');
   const [resTime, setResTime] = useState<string>('19:30');
@@ -131,7 +132,7 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [customBudget, setCustomBudget] = useState<number | ''>(450);
   const [selectedPreset, setSelectedPreset] = useState<string>('pro');
   const [offerNotes, setOfferNotes] = useState<string>('');
-  const [additions, setAdditions] = useState<{ [key: string]: boolean }>({
+  const [additions, setAdditions] = useState<Record<string, boolean>>({
     responsive: true,
     cms: true,
     seo: true,
@@ -189,7 +190,7 @@ export default function IntegratedPortfolio(): JSX.Element {
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-zinc-900 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
             <button 
-              onClick={() => { setActiveApp('portfolio'); }} 
+              onClick={() => setActiveApp('portfolio')} 
               className="text-xs font-bold text-yellow-500 hover:text-yellow-400 flex items-center gap-2 bg-yellow-500/10 px-4 py-2 rounded-xl border border-yellow-500/20 transition-all"
             >
               ← Back To Portfolio Deck
@@ -369,8 +370,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
                 <div className="space-y-3 text-xs text-zinc-300 bg-black/60 p-4 rounded-xl border border-zinc-800/80">
                   {diningLogs.length === 0 ? (
-                    <div className="space-y-3 text-xs text-zinc-300 bg-black/60 p-4 rounded-xl border border-zinc-800/80">
-                  {diningLogs.length === 0 ? (
                     <p className="text-zinc-600 text-center py-4">No active telemetry stream.</p>
                   ) : (
                     diningLogs.map((log, i) => <p key={i} className="leading-relaxed">&gt; {log}</p>)
@@ -449,7 +448,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                       : 'text-zinc-400 hover:text-white'
                   }`}
                 >
-                  {tab.label}
+{tab.label}
                 </button>
               ))}
             </nav>
@@ -580,7 +579,7 @@ export default function IntegratedPortfolio(): JSX.Element {
 
                     <div className="flex flex-wrap gap-2 pt-4">
                       <button 
-                        onClick={() => { setActiveApp('ecommerce'); }} 
+                        onClick={() => setActiveApp('ecommerce')} 
                         className="bg-zinc-900 border border-zinc-800 hover:border-yellow-500 text-yellow-400 text-xs font-semibold px-5 py-2.5 rounded-xl transition-all"
                       >
                         Launch Demo Console
@@ -683,7 +682,8 @@ export default function IntegratedPortfolio(): JSX.Element {
                 {(() => {
                   const cs = CASE_STUDIES.find(c => c.id === selectedCaseStudy)!;
                   return (
-                    <div className="lg:col-span-2 bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl space-y-6">
+                    
+              <div className="lg:col-span-2 bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl space-y-6">
                       <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
                         <div>
                           <span className="text-xs font-mono text-yellow-500">{cs.category}</span>
@@ -803,7 +803,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     <label key={item.key} className="flex items-center gap-2.5 bg-black/40 border border-zinc-800 p-3 rounded-xl cursor-pointer hover:border-zinc-700">
                       <input
                         type="checkbox"
-                        checked={additions[item.key]}
+                        checked={additions[item.key] || false}
                         onChange={(e) => setAdditions({ ...additions, [item.key]: e.target.checked })}
                         className="accent-yellow-500 rounded"
                       />
@@ -840,7 +840,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                   className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs px-6 py-3.5 rounded-xl transition-all flex items-center gap-2 shadow-lg"
                 >
                   💬 Submit Offer via WhatsApp →
-                </a>
+                  </a>
               </div>
             </div>
           )}
@@ -884,4 +884,4 @@ export default function IntegratedPortfolio(): JSX.Element {
 
     </div>
   );
-                  }
+          }
