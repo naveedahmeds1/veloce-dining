@@ -670,3 +670,131 @@ export default function IntegratedPortfolio(): JSX.Element {
     </div>
   );
               }
+<div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs font-bold text-white">{preset.title}</span>
+                          <span className="text-[8px] font-mono bg-yellow-500/20 text-yellow-400 px-1.5 py-0.5 rounded">{preset.badge}</span>
+                        </div>
+                        <p className="text-[10px] text-zinc-400 mt-2 font-light">{preset.desc}</p>
+                      </div>
+                      <div className="text-xs font-mono font-bold text-yellow-400 mt-4">${preset.price} USD</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. CUSTOM BUDGET INPUT FIELD */}
+              <div className="space-y-3 bg-black/40 border border-zinc-800 p-5 rounded-2xl">
+                <label className="text-xs font-mono uppercase text-zinc-400 block">// 2. Or Enter Your Own Custom Budget ($ USD or PKR equivalent)</label>
+                <div className="flex items-center gap-3">
+                  <span className="text-xl font-bold font-mono text-yellow-500">$</span>
+                  <input
+                    type="number"
+                    value={customBudget}
+                    onChange={(e) => {
+                      const val = e.target.value === '' ? '' : Number(e.target.value);
+                      setCustomBudget(val);
+                      setSelectedPreset('custom');
+                    }}
+                    placeholder="Enter your target budget (e.g. 300)"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-yellow-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* 3. OPTIONAL FEATURES / REQUIREMENTS */}
+              <div className="space-y-3">
+                <label className="text-xs font-mono uppercase text-zinc-400 block">// 3. Select Desired Capabilities</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
+                  {[
+                    { key: "responsive", label: "Mobile Responsive" },
+                    { key: "cms", label: "Content Admin Panel" },
+                    { key: "seo", label: "Basic SEO Setup" },
+                    { key: "database", label: "Database / Backend" },
+                    { key: "speed", label: "Page Speed Optimization" }
+                  ].map((item) => (
+                    <label key={item.key} className="flex items-center gap-2.5 bg-black/40 border border-zinc-800 p-3 rounded-xl cursor-pointer hover:border-zinc-700">
+                      <input
+                        type="checkbox"
+                        checked={additions[item.key]}
+                        onChange={(e) => setAdditions({ ...additions, [item.key]: e.target.checked })}
+                        className="accent-yellow-500 rounded"
+                      />
+                      <span className="text-zinc-300 text-[11px]">{item.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4. BRIEF NOTES */}
+              <div className="space-y-2">
+                <label className="text-xs font-mono uppercase text-zinc-400 block">// 4. Short Project Description (Optional)</label>
+                <textarea
+                  rows={2}
+                  value={offerNotes}
+                  onChange={(e) => setOfferNotes(e.target.value)}
+                  placeholder="Describe what kind of website/app you want to build..."
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500"
+                />
+              </div>
+
+              {/* ACTION SUMMARY BOX */}
+              <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-wrap justify-between items-center gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase block">Total Offered Value</span>
+                  <span className="text-2xl font-mono font-bold text-yellow-400">
+                    {customBudget ? `$${customBudget} USD` : 'Negotiable Offer'}
+                  </span>
+                </div>
+                <a
+                  href={getWhatsAppOfferLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs px-6 py-3.5 rounded-xl transition-all flex items-center gap-2 shadow-lg"
+                >
+                  💬 Send Custom Offer via WhatsApp →
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: CONTACT */}
+          {activeTab === 'contact' && (
+            <div className="max-w-md mx-auto space-y-6 text-center bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl">
+              <div>
+                <h2 className="text-2xl font-bold text-white">Let's Work Together</h2>
+                <p className="text-xs text-zinc-400 mt-1">Available for both local Pakistani projects & international client work.</p>
+              </div>
+
+              <div className="space-y-3 font-mono text-xs">
+                <a 
+                  href="https://api.whatsapp.com/send?phone=923103273904&text=Hi%20Naveed,%20I%20want%20to%20discuss%20a%20project." 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black p-3.5 rounded-xl flex items-center justify-center gap-2 font-bold transition-all"
+                >
+                  💬 Chat On WhatsApp (+923103273904)
+                </a>
+
+                <a 
+                  href="mailto:na0953237@gmail.com"
+                  className="w-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black p-3.5 rounded-xl flex items-center justify-center gap-2 font-bold transition-all"
+                >
+                  ✉️ Send Email Brief
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* FOOTER */}
+          <footer className="mt-20 pt-6 border-t border-zinc-900 flex flex-wrap justify-between items-center text-xs text-zinc-600 font-mono">
+            <div>© {new Date().getFullYear()} Naveed. Developer Portfolio.</div>
+            <div>Built with Next.js & Tailwind CSS</div>
+          </footer>
+
+        </main>
+      )}
+
+    </div>
+  );
+                }
