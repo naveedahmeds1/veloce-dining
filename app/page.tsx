@@ -58,7 +58,7 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [diningManifest, setDiningManifest] = useState<{ id: string; name: string; priceUSD: number; qty: number }[]>([]);
   const [diningTrackingActive, setDiningTrackingActive] = useState<boolean>(false);
   const [deliveryMode, setDeliveryMode] = useState<'pod' | 'drone'>('pod');
-  const [countdown, setCountdown] = useState<number>(840); // 14 Minutes
+  const [countdown, setCountdown] = useState<number>(840);
   const [diningLogs, setDiningLogs] = useState<string[]>([]);
   
   // Reservation Form State
@@ -75,14 +75,9 @@ export default function IntegratedPortfolio(): JSX.Element {
     const converted = (priceInUSD * rate).toFixed(currency === 'PKR' ? 0 : 2);
     return `${symbol}${converted}`;
   };
-
   const triggerNotification = (msg: string): void => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 3500);
-  };
-  const handleNavigation = (target: 'portfolio' | 'dining' | 'ecommerce') => {
-    setActiveApp(target);
-    window.history.pushState({ app: target }, '', '');
   };
 
   // Delivery Timer
@@ -133,7 +128,6 @@ export default function IntegratedPortfolio(): JSX.Element {
     }
   }, [activeApp, ecomTab]);
 
-  // Platter Calculator Totals
   const calcSubtotal = diningManifest.reduce((acc, item) => acc + (item.priceUSD * item.qty), 0);
   const calcTax = calcSubtotal * 0.08;
   const calcDelivery = calcSubtotal > 0 ? 5.00 : 0;
@@ -150,19 +144,15 @@ export default function IntegratedPortfolio(): JSX.Element {
   return (
     <div className="min-h-screen bg-[#030712] text-white relative font-sans antialiased selection:bg-yellow-500/30">
       
-      {/* GLOBAL NOTIFICATION BAR */}
       {notification && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/90 backdrop-blur-xl border border-yellow-500/40 text-white px-6 py-3 rounded-full text-xs font-medium tracking-wide shadow-2xl flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
           <span>{notification}</span>
         </div>
       )}
-
       {/* ================= MAIN ORIGINAL PORTFOLIO DASHBOARD ================= */}
       {activeApp === 'portfolio' && (
-      <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
-          
-          {/* HEADER WITH ORIGINAL TABS & CURRENCY SWITCHER */}
+        <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
           <header className="flex flex-wrap justify-between items-center pb-8 border-b border-zinc-900 gap-4">
             <div>
               <h1 className="text-3xl font-extrabold tracking-tight text-white">Full-Stack Digital Systems</h1>
@@ -170,7 +160,6 @@ export default function IntegratedPortfolio(): JSX.Element {
             </div>
             
             <div className="flex items-center gap-3">
-              {/* Currency Selector */}
               <div className="flex items-center gap-1 bg-zinc-900 p-1 rounded-xl border border-zinc-800">
                 {(['USD', 'EUR', 'GBP', 'PKR'] as Currency[]).map((curr) => (
                   <button key={curr} onClick={() => setCurrency(curr)} className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all ${currency === curr ? 'bg-yellow-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'}`}>{curr}</button>
@@ -179,30 +168,25 @@ export default function IntegratedPortfolio(): JSX.Element {
             </div>
           </header>
 
-          {/* PORTFOLIO NAVIGATION TABS */}
           <nav className="flex space-x-2 my-8 border-b border-zinc-900 pb-4">
             {[
               { id: 'systems', label: 'Production Systems' },
               { id: 'stack', label: 'Full Architecture Stack' },
               { id: 'contact', label: 'Direct Contact' }
             ].map((tab) => (
-              <button key={tab.id} onClick={() => setPortfolioTab(tab.id as any)} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${portfolioTab === tab.id ? 'bg-yellow-500 text-black shadow-md' : 'bg-zinc-900/60 text-zinc-400 hover:text-white border border-zinc-800'}`}>
+              <button key={tab.id} onClick={() => setPortfolioTab(tab.id as 'systems' | 'stack' | 'contact')} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${portfolioTab === tab.id ? 'bg-yellow-500 text-black shadow-md' : 'bg-zinc-900/60 text-zinc-400 hover:text-white border border-zinc-800'}`}>
                 {tab.label}
               </button>
             ))}
           </nav>
 
           <main className="space-y-12">
-            
-            {/* TAB 1: PRODUCTION SYSTEMS */}
             {portfolioTab === 'systems' && (
               <section className="space-y-6">
                 <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Enterprise Systems & Interactive Demos</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  
-                  {/* CARD 1: VELOCE DINING SYSTEMS (CONSOLE DEMO) */}
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
+                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                     <div>
                       <div className="flex justify-between items-start">
                         <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Console</h3>
@@ -210,13 +194,12 @@ export default function IntegratedPortfolio(): JSX.Element {
                       </div>
                       <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Luxury culinary web platform featuring real-time driver telemetry, live countdowns, multi-tier room reservations, and automated platter calculators.</p>
                     </div>
-                    <button onClick={() => handleNavigation('dining')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
+                    <button onClick={() => setActiveApp('dining')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
                       Launch Interactive Console →
                     </button>
                   </div>
 
-                  {/* CARD 2: VELOCE DINING LIVE PRODUCTION SITE */}
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
+                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                     <div>
                       <div className="flex justify-between items-start">
                         <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Live Portal</h3>
@@ -229,8 +212,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </a>
                   </div>
 
-                  {/* CARD 3: APEX COMBO STOREFRONT (RESTORED ORIGINAL CARD) */}
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
+                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                     <div>
                       <div className="flex justify-between items-start">
                         <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Apex Combo Hardware Store</h3>
@@ -238,14 +220,11 @@ export default function IntegratedPortfolio(): JSX.Element {
                       </div>
                       <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">High-performance e-commerce engine with multi-currency conversion, real-time checkout simulation, and live logistics logging.</p>
                     </div>
-                    <button onClick={() => handleNavigation('ecommerce')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
+                    <button onClick={() => setActiveApp('ecommerce')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
                       Launch Store Console →
                     </button>
                   </div>
-
-                  {/* CARD 4: AI BLOG WRITER */}
-                  
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 hover:shadow-[0_0_40px_rgba(234,179,8,0.04)] rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
+                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
                     <div>
                       <div className="flex justify-between items-start">
                         <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">AI Content Generator</h3>
@@ -257,12 +236,10 @@ export default function IntegratedPortfolio(): JSX.Element {
                       Launch AI App ↗
                     </a>
                   </div>
-
                 </div>
               </section>
             )}
 
-            {/* TAB 2: FULL ARCHITECTURE STACK */}
             {portfolioTab === 'stack' && (
               <div className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl space-y-6">
                 <h3 className="text-lg font-bold text-white">Engineering Architecture & Tech Stack</h3>
@@ -286,7 +263,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* TAB 3: DIRECT CONTACT */}
             {portfolioTab === 'contact' && (
               <div className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl max-w-xl space-y-4">
                 <h3 className="text-lg font-bold text-white">Get In Touch</h3>
@@ -301,7 +277,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
               </div>
             )}
-
           </main>
         </div>
       )}
@@ -310,7 +285,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-6 py-3 flex flex-wrap items-center justify-between gap-4">
-            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Portfolio Console</button>
+            <button onClick={() => { setActiveApp('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Portfolio Console</button>
             <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80">
               {(['home', 'menu', 'calculator', 'reservation', 'tracking', 'events'] as const).map((tab) => (
                 <button key={tab} onClick={() => setDiningTab(tab)} className={`px-3 py-1.5 rounded-lg text-xs capitalize font-medium transition-all ${diningTab === tab ? 'bg-yellow-500 text-black font-bold shadow' : 'text-zinc-400 hover:text-zinc-200'}`}>{tab}</button>
@@ -319,7 +294,6 @@ export default function IntegratedPortfolio(): JSX.Element {
             <span className="text-[10px] bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded-full font-mono uppercase tracking-widest">Veloce Suite v4.0</span>
           </header>
           <main className="max-w-6xl mx-auto px-6 py-10 relative z-10">
-            {/* TAB: HOME */}
             {diningTab === 'home' && (
               <div className="space-y-12">
                 <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden bg-cover bg-center flex items-center p-8 sm:p-12 border border-zinc-900 shadow-2xl" style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80')` }}>
@@ -334,7 +308,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                   </div>
                 </div>
 
-                {/* SPECIAL MEALS & PLATTER HIGHLIGHTS */}
                 <div>
                   <h3 className="text-xs font-mono text-yellow-500 uppercase tracking-widest mb-4">// Featured Chef Special Platters</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -359,10 +332,9 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* TAB: MENU & MEALS */}
             {diningTab === 'menu' && (
               <div className="space-y-6">
-                <div className="flex flex-wrap items-center justify-between bg-zinc-900/40 backdrop-blur-md border border-zinc-800 p-4 rounded-2xl gap-4">
+                <div className="flex flex-wrap items-center justify-between bg-zinc-900/45 backdrop-blur-md border border-zinc-800 p-4 rounded-2xl gap-4">
                   <div>
                     <h2 className="text-xl font-bold">Gourmet Selection</h2>
                     <p className="text-xs text-zinc-500">Filter by category or select dishes to build your platter</p>
@@ -399,9 +371,11 @@ export default function IntegratedPortfolio(): JSX.Element {
                         </div>
                       </div>
                     </div>
-                )}
+                  ))}
+                </div>
+                </div>
+            )}
 
-            {/* TAB: PLATTER & BILL CALCULATOR */}
             {diningTab === 'calculator' && (
               <div className="max-w-3xl mx-auto bg-zinc-900/30 border border-zinc-800 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-800 mb-6">
@@ -454,7 +428,6 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* TAB: RESERVATIONS WITH TIERS */}
             {diningTab === 'reservation' && (
               <div className="max-w-2xl mx-auto bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
                 <div className="mb-6">
@@ -499,11 +472,8 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
 
-            {/* TAB: LIVE TRACKING, COURIER & DRONE */}
             {diningTab === 'tracking' && (
               <div className="max-w-3xl mx-auto space-y-6">
-                
-                {/* LIVE COURIER & DRONE TELEMETRY HEADER */}
                 <div className="bg-zinc-900/40 border border-zinc-800 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
                   <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-zinc-800">
                     <div>
@@ -511,14 +481,12 @@ export default function IntegratedPortfolio(): JSX.Element {
                       <h3 className="text-xl font-bold text-white mt-1">Active Dispatch Status</h3>
                     </div>
 
-                    {/* Mode Switcher */}
                     <div className="flex bg-black p-1 rounded-xl border border-zinc-800 text-xs">
                       <button onClick={() => setDeliveryMode('pod')} className={`px-3 py-1 rounded-lg transition-all ${deliveryMode === 'pod' ? 'bg-yellow-500 text-black font-bold' : 'text-zinc-400'}`}>Electric Pod</button>
                       <button onClick={() => setDeliveryMode('drone')} className={`px-3 py-1 rounded-lg transition-all ${deliveryMode === 'drone' ? 'bg-yellow-500 text-black font-bold' : 'text-zinc-400'}`}>Aerial Drone</button>
                     </div>
                   </div>
 
-                  {/* COURIER / DRONE CARRIER DETAILS */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
                     <div className="bg-black/50 p-4 rounded-2xl border border-zinc-800 font-mono text-xs">
                       <p className="text-zinc-500 text-[10px] uppercase">{deliveryMode === 'pod' ? 'Driver In-Charge' : 'Drone Operator'}</p>
@@ -539,7 +507,6 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </div>
                   </div>
 
-                  {/* LIVE LOG TERMINAL */}
                   <div className="space-y-2 bg-black/80 p-4 rounded-2xl border border-zinc-800 font-mono text-xs max-h-[180px] overflow-y-auto text-zinc-400">
                     {diningLogs.map((log, idx) => (
                       <p key={idx} className="leading-relaxed">&gt; [TELEMETRY] {log}</p>
@@ -548,15 +515,13 @@ export default function IntegratedPortfolio(): JSX.Element {
                   </div>
                 </div>
 
-                {/* SIMULATED MAP INTERFACE */}
                 <div className="bg-zinc-900/30 border border-zinc-800 p-2 rounded-3xl overflow-hidden relative shadow-2xl">
                   <iframe title="Map Core" width="100%" height="240" frameBorder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=66.9000%2C24.8000%2C67.1000%2C24.9500&amp;layer=mapnik" className="opacity-40 invert-[0.92] hue-rotate-[180deg] saturate-[0.3] rounded-2xl" />
                 </div>
               </div>
             )}
 
-            {/* TAB: EVENTS & BANQUETS */}
-                  {diningTab === 'events' && (
+            {diningTab === 'events' && (
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-zinc-900/30 backdrop-blur-xl border border-zinc-800 rounded-3xl overflow-hidden p-6 flex flex-col justify-between shadow-xl group">
                   <div>
@@ -585,7 +550,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-zinc-900 px-6 py-4 flex items-center justify-between">
-            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Portfolio Console</button>
+            <button onClick={() => setActiveApp('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Portfolio Console</button>
             <nav className="flex bg-zinc-900/50 border border-zinc-800 p-1 rounded-full">
               <button onClick={() => setEcomTab('shop')} className={`px-4 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Store Grid</button>
               <button onClick={() => setEcomTab('checkout')} className={`px-4 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Checkout</button>
@@ -635,6 +600,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </form>
               </div>
             )}
+
             {ecomTab === 'tracking' && (
               <div className="max-w-xl mx-auto space-y-4">
                 <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-6 font-mono text-xs shadow-2xl">
@@ -646,8 +612,9 @@ export default function IntegratedPortfolio(): JSX.Element {
               </div>
             )}
           </main>
-        </div>
+          </div>
       )}
     </div>
   );
-          }
+}
+          
