@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, JSX } from 'react';
 
-// === TYPES & MULTI-CURRENCY ===
+// === TYPES & MULTI-CURRENCY LOGIC ===
 type Currency = 'USD' | 'EUR' | 'GBP' | 'PKR';
 
 const CURRENCY_RATES: Record<Currency, { symbol: string; rate: number }> = {
@@ -50,14 +50,21 @@ const MENU_ITEMS = [
   { id: 'm6', name: 'Smoked BBQ Feast Platter', category: 'Platters', priceUSD: 65.00, tag: 'SPECIAL OFFER', image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80", desc: "Slow-cooked beef brisket, smoked ribs, artisanal sausages & signature sauce." }
 ];
 
-export default function CompletePortfolioSystem(): JSX.Element {
-  // Navigation State
+export default function InternationalPortfolioSystem(): JSX.Element {
+  // Navigation & Core States
   const [activeApp, setActiveApp] = useState<'portfolio' | 'dining'>('portfolio');
   const [currency, setCurrency] = useState<Currency>('USD');
   const [notification, setNotification] = useState<string | null>(null);
 
   // Custom Offer Form State
-  const [offerData, setOfferData] = useState({ clientName: '', clientEmail: '', projectType: 'Full-Stack Web App', budget: '1000', message: '' });
+  const [offerData, setOfferData] = useState({
+    clientName: '',
+    clientEmail: '',
+    clientPhone: '',
+    projectType: 'Full-Stack Enterprise App',
+    budgetUSD: 1500,
+    message: ''
+  });
 
   // Veloce Dining Engine State
   const [diningTab, setDiningTab] = useState<'home' | 'menu' | 'calculator' | 'reservation' | 'tracking' | 'events'>('home');
@@ -71,7 +78,8 @@ export default function CompletePortfolioSystem(): JSX.Element {
   // Reservation State
   const [resData, setResData] = useState({ name: '', classTier: 'business', date: '', time: '', guests: '2' });
 
-  const formatPrice = (priceInUSD: number) => {
+  // Price Conversion Helper
+  const formatPrice = (priceInUSD: number): string => {
     const { symbol, rate } = CURRENCY_RATES[currency];
     const converted = (priceInUSD * rate).toFixed(currency === 'PKR' ? 0 : 2);
     return `${symbol}${converted}`;
@@ -82,7 +90,7 @@ export default function CompletePortfolioSystem(): JSX.Element {
     setTimeout(() => setNotification(null), 3500);
   };
 
-// Delivery Countdown Timer
+  // Delivery Countdown Timer
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (diningTrackingActive && countdown > 0) {
@@ -91,7 +99,7 @@ export default function CompletePortfolioSystem(): JSX.Element {
     return () => clearInterval(interval);
   }, [diningTrackingActive, countdown]);
 
-  // Telemetry Logs
+  // Telemetry Logs Simulation
   useEffect(() => {
     if (diningTrackingActive) {
       setDiningLogs([
@@ -120,17 +128,29 @@ export default function CompletePortfolioSystem(): JSX.Element {
 
   const filteredDining = diningFilter === 'All' ? MENU_ITEMS : MENU_ITEMS.filter(item => item.category === diningFilter);
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // Direct Offer Dispatch Generator
+  // Direct Offer Dispatch Handler
   const handleOfferSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoUrl = `mailto:na0953237@gmail.com?subject=Project Offer: ${offerData.projectType} from ${offerData.clientName}&body=Client Name: ${offerData.clientName}%0D%0AClient Email: ${offerData.clientEmail}%0D%0AProject Type: ${offerData.projectType}%0D%0ABudget: $${offerData.budget}%0D%0AMessage: ${offerData.message}`;
-    window.location.href = mailtoUrl;
+    const formattedBudget = formatPrice(offerData.budgetUSD);
+    const subject = encodeURIComponent(`Project Offer: ${offerData.projectType} from ${offerData.clientName}`);
+    const body = encodeURIComponent(
+      `CLIENT OFFER DETAILS:\n` +
+      `----------------------\n` +
+      `Name: ${offerData.clientName}\n` +
+      `Email: ${offerData.clientEmail}\n` +
+      `Phone/WhatsApp: ${offerData.clientPhone}\n` +
+      `Project Type: ${offerData.projectType}\n` +
+      `Estimated Budget: ${formattedBudget} (${offerData.budgetUSD} USD)\n\n` +
+      `Project Requirements & Message:\n${offerData.message}`
+    );
+
+    window.location.href = `mailto:na0953237@gmail.com?subject=${subject}&body=${body}`;
     triggerNotification("🚀 Custom Offer compiled! Opening email client...");
   };
 
@@ -145,7 +165,7 @@ export default function CompletePortfolioSystem(): JSX.Element {
         </div>
       )}
 
-      {/* ================= MAIN PORTFOLIO WITH ALL FEATURES ================= */}
+      {/* ================= PORTFOLIO MAIN CONTAINER ================= */}
       {activeApp === 'portfolio' && (
         <div className="max-w-5xl mx-auto px-6 py-12 space-y-12">
           
@@ -166,11 +186,11 @@ export default function CompletePortfolioSystem(): JSX.Element {
                 {(['USD', 'EUR', 'GBP', 'PKR'] as Currency[]).map((curr) => (
                   <button key={curr} onClick={() => setCurrency(curr)} className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all ${currency === curr ? 'bg-yellow-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'}`}>{curr}</button>
                 ))}
-                </div>
+              </div>
             </div>
 
             <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl font-light">
-              Designing & developing custom full-stack applications, real-time telemetry systems, e-commerce engines, and high-converting modern platforms.
+              Designing & developing high-performance full-stack web platforms, real-time telemetry systems, interactive dining consoles, and AI-powered tools with precision.
             </p>
 
             {/* DIRECT CONTACT BUTTONS */}
@@ -184,11 +204,11 @@ export default function CompletePortfolioSystem(): JSX.Element {
             </div>
           </header>
 
-          {/* TRUSTED BY & KEY STATS */}
+          {/* TRUST METRICS & METRICS DASHBOARD */}
           <section className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-zinc-900/30 border border-zinc-800/80 rounded-3xl backdrop-blur-xl">
             <div className="text-center font-mono">
               <p className="text-2xl font-black text-yellow-500">25+</p>
-              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Projects Completed</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Projects Delivered</p>
             </div>
             <div className="text-center font-mono">
               <p className="text-2xl font-black text-emerald-400">100%</p>
@@ -196,7 +216,7 @@ export default function CompletePortfolioSystem(): JSX.Element {
             </div>
             <div className="text-center font-mono">
               <p className="text-2xl font-black text-yellow-500">99.9%</p>
-              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Uptime Guaranteed</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">System Uptime</p>
             </div>
             <div className="text-center font-mono">
               <p className="text-2xl font-black text-emerald-400">24/7</p>
@@ -204,9 +224,9 @@ export default function CompletePortfolioSystem(): JSX.Element {
             </div>
           </section>
 
-          {/* FEATURED PROJECTS */}
+          {/* FEATURED PRODUCTION PROJECTS */}
           <section className="space-y-6">
-            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Featured Production Builds</h2>
+            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Featured Production Applications</h2>
 
             <div className="grid grid-cols-1 gap-6">
               
@@ -219,7 +239,7 @@ export default function CompletePortfolioSystem(): JSX.Element {
                   </div>
                   <h3 className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">Veloce Dining Platform</h3>
                   <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Luxury culinary platform featuring real-time driver telemetry, live countdown timers, multi-tier room reservations, and dynamic order calculators.
+                    Luxury culinary platform featuring real-time driver/drone telemetry, live countdown timers, multi-tier room reservations, and dynamic order calculators.
                   </p>
                 </div>
 
@@ -251,12 +271,12 @@ export default function CompletePortfolioSystem(): JSX.Element {
                 </a>
               </div>
 
-              </div>
+            </div>
           </section>
 
           {/* CLIENT REVIEWS & TESTIMONIALS */}
           <section className="space-y-6">
-            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Client Reviews & Feedback</h2>
+            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Trusted By Global Clients & Reviews</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {CLIENT_REVIEWS.map((rev) => (
@@ -282,40 +302,44 @@ export default function CompletePortfolioSystem(): JSX.Element {
             </div>
           </section>
 
-          {/* CUSTOM PROJECT OFFERS & DIRECT INQUIRY */}
+          {/* CUSTOM PROJECT OFFERS & DIRECT DISPATCH */}
           <section className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl space-y-6 shadow-2xl">
-            <div>
-              <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">INSTANT ESTIMATE</span>
-              <h2 className="text-2xl font-bold text-white mt-2">Send Direct Custom Project Offer</h2>
-              <p className="text-xs text-zinc-400 mt-1 font-light">Select your budget and project requirements. The offer will be sent directly to my email & phone notification system.</p>
+            <div className="flex justify-between items-start flex-wrap gap-2">
+              <div>
+                <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">INSTANT PROJECT OFFER GENERATOR</span>
+                <h2 className="text-2xl font-bold text-white mt-2">Send Custom Project Offer Directly</h2>
+                <p className="text-xs text-zinc-400 mt-1 font-light">Select your budget in {currency} ({formatPrice(offerData.budgetUSD)}). Offers are dispatched directly to my email and phone.</p>
+              </div>
+              <span className="text-xs font-mono text-yellow-500 bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Selected: {formatPrice(offerData.budgetUSD)}</span>
             </div>
 
             <form onSubmit={handleOfferSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="text" required placeholder="Your Name / Company" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientName} onChange={(e) => setOfferData({...offerData, clientName: e.target.value})} />
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <input type="text" required placeholder="Your Full Name" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientName} onChange={(e) => setOfferData({...offerData, clientName: e.target.value})} />
                 <input type="email" required placeholder="Your Email Address" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientEmail} onChange={(e) => setOfferData({...offerData, clientEmail: e.target.value})} />
+                <input type="tel" placeholder="WhatsApp / Phone Number" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientPhone} onChange={(e) => setOfferData({...offerData, clientPhone: e.target.value})} />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <select className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none font-mono" value={offerData.projectType} onChange={(e) => setOfferData({...offerData, projectType: e.target.value})}>
-                  <option value="Full-Stack Web App">Full-Stack Web Application</option>
-                  <option value="Restaurant / Dining System">Restaurant / Food Delivery Platform</option>
-                  <option value="E-Commerce Storefront">E-Commerce System</option>
-                  <option value="AI Tool Integration">AI System Integration</option>
-                </select>
+                  <option value="Full-Stack Web App">Full-Stack Enterprise Web Application</option>
+                  <option value="Restaurant / Dining System">Veloce Restaurant / Delivery Console</option>
+                  <option value="E-Commerce System">Modern E-Commerce Engine</option>
+                  <option value="AI Integration">AI API Custom Integration</option>
+      </select>
 
-                <select className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none font-mono" value={offerData.budget} onChange={(e) => setOfferData({...offerData, budget: e.target.value})}>
-                  <option value="500">$500 - $1,000</option>
-                  <option value="1000">$1,000 - $2,500</option>
-                  <option value="2500">$2,500 - $5,000</option>
-                  <option value="5000">$5,000+</option>
+                <select className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none font-mono" value={offerData.budgetUSD} onChange={(e) => setOfferData({...offerData, budgetUSD: Number(e.target.value)})}>
+                  <option value={500}>{formatPrice(500)} - Small Project ($500 USD)</option>
+                  <option value={1500}>{formatPrice(1500)} - Medium Platform ($1,500 USD)</option>
+                  <option value={3000}>{formatPrice(3000)} - Enterprise Application ($3,000 USD)</option>
+                  <option value={5000}>{formatPrice(5000)} - Custom Full Suite ($5,000 USD+)</option>
                 </select>
               </div>
 
-              <textarea required rows={3} placeholder="Describe your project vision or required features..." className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.message} onChange={(e) => setOfferData({...offerData, message: e.target.value})} />
+              <textarea required rows={3} placeholder="Describe your custom project requirements..." className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.message} onChange={(e) => setOfferData({...offerData, message: e.target.value})} />
 
               <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs py-3.5 rounded-xl transition-all shadow-lg">
-                🚀 Send Custom Offer Directly via Email & Phone →
+                🚀 Send Custom Offer Directly via Email & WhatsApp →
               </button>
             </form>
           </section>
@@ -323,14 +347,13 @@ export default function CompletePortfolioSystem(): JSX.Element {
           {/* FOOTER */}
           <footer className="pt-8 border-t border-zinc-900 flex justify-between items-center text-xs text-zinc-500 font-mono">
             <p>© {new Date().getFullYear()} Naveed. All rights reserved.</p>
-            <p>Direct WhatsApp: +923103273904</p>
+            <p>Direct Contact: +923103273904</p>
           </footer>
 
         </div>
       )}
 
-      {/* ================= VELOCE DINING CONSOLE SYSTEM ================= */}
-      {activeApp === 'dining' && (
+      {/* ================= VELOCE DINING SYSTEM CONSOLE ================= */}
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-6 py-3 flex flex-wrap items-center justify-between gap-4">
@@ -599,5 +622,4 @@ export default function CompletePortfolioSystem(): JSX.Element {
 
     </div>
   );
-      }
-              
+                  }
