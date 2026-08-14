@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, JSX } from 'react';
 
-// === INTERNATIONAL MULTI-CURRENCY CONVERTOR ===
+// === TYPES & MULTI-CURRENCY ===
 type Currency = 'USD' | 'EUR' | 'GBP' | 'PKR';
 
 const CURRENCY_RATES: Record<Currency, { symbol: string; rate: number }> = {
@@ -12,31 +12,35 @@ const CURRENCY_RATES: Record<Currency, { symbol: string; rate: number }> = {
   PKR: { symbol: 'Rs ', rate: 278 }
 };
 
-// === REALISTIC ENTERPRISE PRODUCTS FOR APEX STOREFRONT ===
-const PREMIUM_PRODUCTS = [
-  { 
-    id: "p1", 
-    name: "Apex Quantum Router v4", 
-    tagline: "High-frequency data & liquidity router.", 
-    priceUSD: 1299, 
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80",
-    description: "Enterprise hardware for high-frequency routing, encrypted data transmission, and automated load distribution across global server clusters.", 
-    specs: ["99.999% Guaranteed Network Uptime", "Sub-millisecond Latency Pipeline", "Hardware-level Encrypted Storage Vault"], 
-    badge: "Enterprise Grade" 
+// === CLIENT REVIEWS DATA ===
+const CLIENT_REVIEWS = [
+  {
+    id: 1,
+    name: "Alexander Wright",
+    role: "CEO, Nexa Tech Global",
+    review: "Naveed delivered our full-stack enterprise dashboard ahead of schedule. Exceptional performance and UI precision!",
+    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
   },
-  { 
-    id: "p2", 
-    name: "Matrix Core Computing Node", 
-    tagline: "High-performance neural computation stack.", 
-    priceUSD: 2450, 
-    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80",
-    description: "Dedicated computation unit optimized for deep learning models, local API gateways, and distributed database clustering.", 
-    specs: ["256-Core Neural Acceleration Layer", "Liquid Cooled Thermal Chassis", "Native API & SDK Integration"], 
-    badge: "Pro Series" 
+  {
+    id: 2,
+    name: "Sarah Jenkins",
+    role: "Product Lead, Gourmet Vibe",
+    review: "The Veloce Dining system built by Naveed with live tracking and interactive calculators completely transformed our ordering UX.",
+    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    id: 3,
+    name: "Hamza Malik",
+    role: "Founder, Zenith E-Com",
+    review: "10/10 quality. Fast response time, super clean code, and zero bugs during product launch.",
+    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
   }
 ];
 
-// === VELOCE RESTAURANT MENU & PLATTERS ===
+// === VELOCE MENU DATA ===
 const MENU_ITEMS = [
   { id: 'm1', name: 'Truffle Glazed Wagyu Burger', category: 'Main', priceUSD: 24.00, tag: 'CHEF SPECIAL', image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", desc: "Aged Wagyu beef patty with black truffle aioli & caramelized shallots." },
   { id: 'm2', name: 'Smoked Salmon Avocado Crisp', category: 'Starters', priceUSD: 18.50, tag: 'FRESH', image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80", desc: "Fresh Norwegian salmon served on artisanal sourdough toast." },
@@ -46,12 +50,15 @@ const MENU_ITEMS = [
   { id: 'm6', name: 'Smoked BBQ Feast Platter', category: 'Platters', priceUSD: 65.00, tag: 'SPECIAL OFFER', image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80", desc: "Slow-cooked beef brisket, smoked ribs, artisanal sausages & signature sauce." }
 ];
 
-export default function IntegratedPortfolio(): JSX.Element {
+export default function CompletePortfolioSystem(): JSX.Element {
   // Navigation State
-  const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
-  const [portfolioTab, setPortfolioTab] = useState<'systems' | 'stack' | 'contact'>('systems');
+  const [activeApp, setActiveApp] = useState<'portfolio' | 'dining'>('portfolio');
   const [currency, setCurrency] = useState<Currency>('USD');
-  
+  const [notification, setNotification] = useState<string | null>(null);
+
+  // Custom Offer Form State
+  const [offerData, setOfferData] = useState({ clientName: '', clientEmail: '', projectType: 'Full-Stack Web App', budget: '1000', message: '' });
+
   // Veloce Dining Engine State
   const [diningTab, setDiningTab] = useState<'home' | 'menu' | 'calculator' | 'reservation' | 'tracking' | 'events'>('home');
   const [diningFilter, setDiningFilter] = useState<string>('All');
@@ -61,26 +68,21 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [countdown, setCountdown] = useState<number>(840);
   const [diningLogs, setDiningLogs] = useState<string[]>([]);
   
-  // Reservation Form State
+  // Reservation State
   const [resData, setResData] = useState({ name: '', classTier: 'business', date: '', time: '', guests: '2' });
-
-  // Storefront State
-  const [cartCount, setCartCount] = useState<number>(0);
-  const [ecomTab, setEcomTab] = useState<'shop' | 'checkout' | 'tracking'>('shop');
-  const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
-  const [notification, setNotification] = useState<string | null>(null);
 
   const formatPrice = (priceInUSD: number) => {
     const { symbol, rate } = CURRENCY_RATES[currency];
     const converted = (priceInUSD * rate).toFixed(currency === 'PKR' ? 0 : 2);
     return `${symbol}${converted}`;
   };
+
   const triggerNotification = (msg: string): void => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 3500);
   };
 
-  // Delivery Timer
+// Delivery Countdown Timer
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (diningTrackingActive && countdown > 0) {
@@ -89,7 +91,7 @@ export default function IntegratedPortfolio(): JSX.Element {
     return () => clearInterval(interval);
   }, [diningTrackingActive, countdown]);
 
-  // Real Telemetry Logs for Veloce Tracking
+  // Telemetry Logs
   useEffect(() => {
     if (diningTrackingActive) {
       setDiningLogs([
@@ -111,23 +113,6 @@ export default function IntegratedPortfolio(): JSX.Element {
     }
   }, [diningTrackingActive]);
 
-  // Ecom Telemetry
-  useEffect(() => {
-    if (activeApp === 'ecommerce' && ecomTab === 'tracking') {
-      setTerminalLogs([
-        "Connecting to distribution node network...",
-        "Cryptographic order hash validated."
-      ]);
-      const phrases = [
-        "Inventory serial keys reserved in warehouse database.",
-        "Preparing automated dispatch payload.",
-        "Carrier transit manifest generated successfully."
-      ];
-      const timers = phrases.map((phrase, index) => setTimeout(() => setTerminalLogs(prev => [...prev, phrase]), (index + 1) * 1500));
-      return () => timers.forEach(clearTimeout);
-    }
-  }, [activeApp, ecomTab]);
-
   const calcSubtotal = diningManifest.reduce((acc, item) => acc + (item.priceUSD * item.qty), 0);
   const calcTax = calcSubtotal * 0.08;
   const calcDelivery = calcSubtotal > 0 ? 5.00 : 0;
@@ -141,151 +126,215 @@ export default function IntegratedPortfolio(): JSX.Element {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Direct Offer Dispatch Generator
+  const handleOfferSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoUrl = `mailto:na0953237@gmail.com?subject=Project Offer: ${offerData.projectType} from ${offerData.clientName}&body=Client Name: ${offerData.clientName}%0D%0AClient Email: ${offerData.clientEmail}%0D%0AProject Type: ${offerData.projectType}%0D%0ABudget: $${offerData.budget}%0D%0AMessage: ${offerData.message}`;
+    window.location.href = mailtoUrl;
+    triggerNotification("🚀 Custom Offer compiled! Opening email client...");
+  };
+
   return (
     <div className="min-h-screen bg-[#030712] text-white relative font-sans antialiased selection:bg-yellow-500/30">
       
+      {/* Toast Notification */}
       {notification && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/90 backdrop-blur-xl border border-yellow-500/40 text-white px-6 py-3 rounded-full text-xs font-medium tracking-wide shadow-2xl flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
           <span>{notification}</span>
         </div>
       )}
-      {/* ================= MAIN ORIGINAL PORTFOLIO DASHBOARD ================= */}
+
+      {/* ================= MAIN PORTFOLIO WITH ALL FEATURES ================= */}
       {activeApp === 'portfolio' && (
-        <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
-          <header className="flex flex-wrap justify-between items-center pb-8 border-b border-zinc-900 gap-4">
-            <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white">Full-Stack Digital Systems</h1>
-              <p className="text-zinc-500 text-xs mt-1 font-mono uppercase tracking-widest">Production Applications & Architecture</p>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 bg-zinc-900 p-1 rounded-xl border border-zinc-800">
+        <div className="max-w-5xl mx-auto px-6 py-12 space-y-12">
+          
+          {/* HEADER / INTRO SECTION */}
+          <header className="space-y-6">
+            <div className="flex flex-wrap justify-between items-start gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="text-[11px] font-mono text-emerald-400 uppercase tracking-widest font-semibold">Available for hires & custom contracts</span>
+                </div>
+                <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mt-2">Naveed</h1>
+                <p className="text-zinc-400 text-sm mt-1 font-medium">Full-Stack Engineer & Autonomous Web Systems Architect</p>
+              </div>
+
+              {/* Currency Selector */}
+              <div className="flex items-center gap-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800">
                 {(['USD', 'EUR', 'GBP', 'PKR'] as Currency[]).map((curr) => (
                   <button key={curr} onClick={() => setCurrency(curr)} className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all ${currency === curr ? 'bg-yellow-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'}`}>{curr}</button>
                 ))}
-              </div>
+                </div>
+            </div>
+
+            <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl font-light">
+              Designing & developing custom full-stack applications, real-time telemetry systems, e-commerce engines, and high-converting modern platforms.
+            </p>
+
+            {/* DIRECT CONTACT BUTTONS */}
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href="https://api.whatsapp.com/send?phone=923103273904&text=Hi%20Naveed,%20I%20have%20a%20project%20offer%20for%20you." target="_blank" rel="noopener noreferrer" className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                💬 WhatsApp (+923103273904)
+              </a>
+              <a href="mailto:na0953237@gmail.com" className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                ✉️ Direct Email (na0953237@gmail.com)
+              </a>
             </div>
           </header>
 
-          <nav className="flex space-x-2 my-8 border-b border-zinc-900 pb-4">
-            {[
-              { id: 'systems', label: 'Production Systems' },
-              { id: 'stack', label: 'Full Architecture Stack' },
-              { id: 'contact', label: 'Direct Contact' }
-            ].map((tab) => (
-              <button key={tab.id} onClick={() => setPortfolioTab(tab.id as 'systems' | 'stack' | 'contact')} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${portfolioTab === tab.id ? 'bg-yellow-500 text-black shadow-md' : 'bg-zinc-900/60 text-zinc-400 hover:text-white border border-zinc-800'}`}>
-                {tab.label}
+          {/* TRUSTED BY & KEY STATS */}
+          <section className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-zinc-900/30 border border-zinc-800/80 rounded-3xl backdrop-blur-xl">
+            <div className="text-center font-mono">
+              <p className="text-2xl font-black text-yellow-500">25+</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Projects Completed</p>
+            </div>
+            <div className="text-center font-mono">
+              <p className="text-2xl font-black text-emerald-400">100%</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Client Satisfaction</p>
+            </div>
+            <div className="text-center font-mono">
+              <p className="text-2xl font-black text-yellow-500">99.9%</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Uptime Guaranteed</p>
+            </div>
+            <div className="text-center font-mono">
+              <p className="text-2xl font-black text-emerald-400">24/7</p>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Direct Support</p>
+            </div>
+          </section>
+
+          {/* FEATURED PROJECTS */}
+          <section className="space-y-6">
+            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Featured Production Builds</h2>
+
+            <div className="grid grid-cols-1 gap-6">
+              
+              {/* VELOCE DINING CARD */}
+              <div className="p-6 sm:p-8 bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 group shadow-2xl">
+                <div className="space-y-2 max-w-xl">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-0.5 rounded">FULL GOURMET SYSTEM</span>
+                    <span className="text-[10px] font-mono text-zinc-500">Next.js • TypeScript • Tailwind</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">Veloce Dining Platform</h3>
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                    Luxury culinary platform featuring real-time driver telemetry, live countdown timers, multi-tier room reservations, and dynamic order calculators.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-2 w-full sm:w-auto">
+                  <button onClick={() => setActiveApp('dining')} className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-3 rounded-xl transition-all shadow-md text-center">
+                    Launch Interactive App →
+                  </button>
+                  <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-yellow-500 text-xs font-semibold px-5 py-2.5 rounded-xl transition-all text-center">
+                    Visit Live Link ↗
+                  </a>
+                </div>
+              </div>
+
+              {/* AI GENERATOR CARD */}
+              <div className="p-6 sm:p-8 bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 group shadow-2xl">
+                <div className="space-y-2 max-w-xl">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded">AI ENGINE</span>
+                    <span className="text-[10px] font-mono text-zinc-500">React • OpenAI API • Tailwind</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">AI Content Generator</h3>
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                    Automated content platform that converts user prompts into structured, styled technical documentation and blog layouts instantly.
+                  </p>
+                </div>
+
+                <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-yellow-500 text-xs font-semibold px-5 py-3 rounded-xl transition-all text-center w-full sm:w-auto">
+                  Launch AI App ↗
+                </a>
+              </div>
+
+              </div>
+          </section>
+
+          {/* CLIENT REVIEWS & TESTIMONIALS */}
+          <section className="space-y-6">
+            <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Client Reviews & Feedback</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {CLIENT_REVIEWS.map((rev) => (
+                <div key={rev.id} className="bg-zinc-900/30 border border-zinc-800/80 p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                  <div>
+                    <div className="flex text-yellow-400 text-xs gap-1 mb-3">
+                      {Array.from({ length: rev.rating }).map((_, i) => (
+                        <span key={i}>★</span>
+                      ))}
+                    </div>
+                    <p className="text-xs text-zinc-300 font-light leading-relaxed">"{rev.review}"</p>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-3 border-t border-zinc-800/60">
+                    <img src={rev.avatar} alt={rev.name} className="w-8 h-8 rounded-full object-cover" />
+                    <div>
+                      <p className="text-xs font-bold text-white">{rev.name}</p>
+                      <p className="text-[10px] text-zinc-500">{rev.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* CUSTOM PROJECT OFFERS & DIRECT INQUIRY */}
+          <section className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl space-y-6 shadow-2xl">
+            <div>
+              <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">INSTANT ESTIMATE</span>
+              <h2 className="text-2xl font-bold text-white mt-2">Send Direct Custom Project Offer</h2>
+              <p className="text-xs text-zinc-400 mt-1 font-light">Select your budget and project requirements. The offer will be sent directly to my email & phone notification system.</p>
+            </div>
+
+            <form onSubmit={handleOfferSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input type="text" required placeholder="Your Name / Company" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientName} onChange={(e) => setOfferData({...offerData, clientName: e.target.value})} />
+                <input type="email" required placeholder="Your Email Address" className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.clientEmail} onChange={(e) => setOfferData({...offerData, clientEmail: e.target.value})} />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <select className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none font-mono" value={offerData.projectType} onChange={(e) => setOfferData({...offerData, projectType: e.target.value})}>
+                  <option value="Full-Stack Web App">Full-Stack Web Application</option>
+                  <option value="Restaurant / Dining System">Restaurant / Food Delivery Platform</option>
+                  <option value="E-Commerce Storefront">E-Commerce System</option>
+                  <option value="AI Tool Integration">AI System Integration</option>
+                </select>
+
+                <select className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none font-mono" value={offerData.budget} onChange={(e) => setOfferData({...offerData, budget: e.target.value})}>
+                  <option value="500">$500 - $1,000</option>
+                  <option value="1000">$1,000 - $2,500</option>
+                  <option value="2500">$2,500 - $5,000</option>
+                  <option value="5000">$5,000+</option>
+                </select>
+              </div>
+
+              <textarea required rows={3} placeholder="Describe your project vision or required features..." className="w-full bg-black/60 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={offerData.message} onChange={(e) => setOfferData({...offerData, message: e.target.value})} />
+
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs py-3.5 rounded-xl transition-all shadow-lg">
+                🚀 Send Custom Offer Directly via Email & Phone →
               </button>
-            ))}
-          </nav>
+            </form>
+          </section>
 
-          <main className="space-y-12">
-            {portfolioTab === 'systems' && (
-              <section className="space-y-6">
-                <h2 className="text-xs font-mono text-yellow-500 uppercase tracking-widest">// Enterprise Systems & Interactive Demos</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
-                    <div>
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Console</h3>
-                        <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">INTERACTIVE CONSOLE</span>
-                      </div>
-                      <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Luxury culinary web platform featuring real-time driver telemetry, live countdowns, multi-tier room reservations, and automated platter calculators.</p>
-                    </div>
-                    <button onClick={() => setActiveApp('dining')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
-                      Launch Interactive Console →
-                    </button>
-                  </div>
+          {/* FOOTER */}
+          <footer className="pt-8 border-t border-zinc-900 flex justify-between items-center text-xs text-zinc-500 font-mono">
+            <p>© {new Date().getFullYear()} Naveed. All rights reserved.</p>
+            <p>Direct WhatsApp: +923103273904</p>
+          </footer>
 
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
-                    <div>
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Veloce Dining Live Portal</h3>
-                        <span className="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded">PRODUCTION LIVE</span>
-                      </div>
-                      <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Deployed live platform running on Next.js & Vercel edge deployment infrastructure with optimized image rendering and state management.</p>
-                    </div>
-                    <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 text-center transition-all block shadow-md">
-                      Visit Live Site ↗
-                    </a>
-                  </div>
-
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
-                    <div>
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">Apex Combo Hardware Store</h3>
-                        <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">INTERACTIVE CONSOLE</span>
-                      </div>
-                      <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">High-performance e-commerce engine with multi-currency conversion, real-time checkout simulation, and live logistics logging.</p>
-                    </div>
-                    <button onClick={() => setActiveApp('ecommerce')} className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-semibold px-5 py-2.5 rounded-xl transition-all block shadow-md">
-                      Launch Store Console →
-                    </button>
-                  </div>
-                  <div className="p-6 sm:p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all duration-300 flex flex-col justify-between gap-6 group shadow-2xl">
-                    <div>
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-yellow-400 transition-colors">AI Content Generator</h3>
-                        <span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">AI CORE PLATFORM</span>
-                      </div>
-                      <p className="text-sm text-zinc-400 mt-3 font-light leading-relaxed">Autonomous AI platform engineered to parse user prompts and generate structured, formatted technical layouts.</p>
-                    </div>
-                    <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 text-center transition-all block shadow-md">
-                      Launch AI App ↗
-                    </a>
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {portfolioTab === 'stack' && (
-              <div className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl space-y-6">
-                <h3 className="text-lg font-bold text-white">Engineering Architecture & Tech Stack</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {[
-                    { title: "Next.js 14/15", sub: "App Router & SSR" },
-                    { title: "TypeScript", sub: "Type-Safe Systems" },
-                    { title: "Tailwind CSS", sub: "Responsive & Modern UI" },
-                    { title: "Supabase / Postgres", sub: "Relational Database" },
-                    { title: "State Management", sub: "Zustand & React Hooks" },
-                    { title: "REST & WebSockets", sub: "Real-time Telemetry" },
-                    { title: "Vercel Edge", sub: "Global Deployment" },
-                    { title: "UI Components", sub: "Shadcn UI & Framer Motion" }
-                  ].map((tech, idx) => (
-                    <div key={idx} className="bg-black/50 p-4 rounded-2xl border border-zinc-800">
-                      <p className="text-xs font-bold text-yellow-500">{tech.title}</p>
-                      <p className="text-[10px] text-zinc-400 mt-1">{tech.sub}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {portfolioTab === 'contact' && (
-              <div className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 backdrop-blur-xl max-w-xl space-y-4">
-                <h3 className="text-lg font-bold text-white">Get In Touch</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">Available for full-time engineering roles, high-impact freelance builds, and contract work.</p>
-                <div className="pt-2 space-y-3 font-mono text-xs">
-                  <a href="https://api.whatsapp.com/send?phone=923103273904&text=Hi%20Naveed,%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="w-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black p-3.5 rounded-xl flex items-center justify-center gap-2 font-bold transition-all">
-                    💬 Chat On WhatsApp (+923103273904)
-                  </a>
-                  <a href="mailto:na0953237@gmail.com" className="w-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black p-3.5 rounded-xl flex items-center justify-center gap-2 font-bold transition-all">
-                    ✉️ Send Direct Email
-                  </a>
-                </div>
-              </div>
-            )}
-          </main>
         </div>
       )}
 
-      {/* ================= VELOCE RESTAURANT & DINING SYSTEM ================= */}
+      {/* ================= VELOCE DINING CONSOLE SYSTEM ================= */}
+      {activeApp === 'dining' && (
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-6 py-3 flex flex-wrap items-center justify-between gap-4">
-            <button onClick={() => { setActiveApp('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Portfolio Console</button>
+            <button onClick={() => { setActiveApp('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Main Portfolio</button>
             <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80">
               {(['home', 'menu', 'calculator', 'reservation', 'tracking', 'events'] as const).map((tab) => (
                 <button key={tab} onClick={() => setDiningTab(tab)} className={`px-3 py-1.5 rounded-lg text-xs capitalize font-medium transition-all ${diningTab === tab ? 'bg-yellow-500 text-black font-bold shadow' : 'text-zinc-400 hover:text-zinc-200'}`}>{tab}</button>
@@ -293,6 +342,7 @@ export default function IntegratedPortfolio(): JSX.Element {
             </nav>
             <span className="text-[10px] bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded-full font-mono uppercase tracking-widest">Veloce Suite v4.0</span>
           </header>
+
           <main className="max-w-6xl mx-auto px-6 py-10 relative z-10">
             {diningTab === 'home' && (
               <div className="space-y-12">
@@ -373,7 +423,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </div>
                   ))}
                 </div>
-                </div>
+              </div>
             )}
 
             {diningTab === 'calculator' && (
@@ -452,6 +502,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                       ))}
                     </div>
                   </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <input type="date" required className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={resData.date} onChange={(e) => setResData({...resData, date: e.target.value})} />
                     <input type="time" required className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none focus:border-yellow-500" value={resData.time} onChange={(e) => setResData({...resData, time: e.target.value})} />
@@ -546,75 +597,7 @@ export default function IntegratedPortfolio(): JSX.Element {
         </div>
       )}
 
-      {/* ================= APEX COMBO STOREFRONT PLATFORM ================= */}
-      {activeApp === 'ecommerce' && (
-        <div className="min-h-screen bg-black text-[#f5f5f7] font-sans relative z-10">
-          <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-zinc-900 px-6 py-4 flex items-center justify-between">
-            <button onClick={() => setActiveApp('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Portfolio Console</button>
-            <nav className="flex bg-zinc-900/50 border border-zinc-800 p-1 rounded-full">
-              <button onClick={() => setEcomTab('shop')} className={`px-4 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Store Grid</button>
-              <button onClick={() => setEcomTab('checkout')} className={`px-4 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Checkout</button>
-              <button onClick={() => setEcomTab('tracking')} className={`px-4 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'tracking' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Telemetry Logs</button>
-            </nav>
-            <div className="relative bg-zinc-900 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center text-xs">
-              <span>⚡</span>
-              {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-yellow-500 text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">{cartCount}</span>}
-            </div>
-          </header>
-
-          <main className="max-w-5xl mx-auto px-6 py-12">
-            {ecomTab === 'shop' && (
-              <div className="space-y-12">
-                <div className="text-center max-w-2xl mx-auto">
-                  <h1 className="text-4xl font-semibold tracking-tight text-white mb-3">Enterprise Hardware Systems</h1>
-                  <p className="text-zinc-500 text-xs">High-performance computational nodes & data routing units.</p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  {PREMIUM_PRODUCTS.map((product) => (
-                    <div key={product.id} className="bg-zinc-950 border border-zinc-900 hover:border-yellow-500/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all">
-                      <div>
-                        <img src={product.image} alt={product.name} className="w-full h-52 object-cover rounded-2xl mb-6 opacity-80" />
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-[9px] font-mono text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">{product.badge}</span>
-                          <span className="text-sm font-mono font-bold text-yellow-500">{formatPrice(product.priceUSD)}</span>
-                        </div>
-                        <h3 className="text-xl font-medium text-white">{product.name}</h3>
-                        <p className="text-xs text-zinc-500 font-mono mt-1">{product.tagline}</p>
-                        <p className="text-zinc-400 text-xs leading-relaxed mt-3 font-light">{product.description}</p>
-                      </div>
-                      <button onClick={() => { setCartCount(c => c + 1); triggerNotification(`Allocated ${product.name} to cart.`); }} className="w-full bg-[#f5f5f7] hover:bg-white text-black font-semibold text-xs py-3.5 rounded-xl mt-6 transition-all">Request Hardware Allocation</button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {ecomTab === 'checkout' && (
-              <div className="max-w-md mx-auto bg-zinc-950 border border-zinc-900 rounded-3xl p-8 shadow-2xl">
-                <h2 className="text-xl font-bold text-white mb-4">Hardware Order Checkout</h2>
-                <form onSubmit={(e) => { e.preventDefault(); triggerNotification("Routing encrypted telemetry order package..."); setEcomTab('tracking'); }} className="space-y-4">
-                  <input type="text" required placeholder="Authorized Identity Name" className="w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none" />
-                  <input type="email" required placeholder="Encrypted Email Address" className="w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-200 focus:outline-none" />
-                  <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold text-xs py-3.5 rounded-xl transition-all">Confirm Order Dispatch</button>
-                </form>
-              </div>
-            )}
-
-            {ecomTab === 'tracking' && (
-              <div className="max-w-xl mx-auto space-y-4">
-                <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-6 font-mono text-xs shadow-2xl">
-                  <p className="text-yellow-500 font-bold mb-4">// Hardware Transit Telemetry</p>
-                  <div className="space-y-2.5 bg-black p-4 rounded-xl border border-zinc-900 max-h-[220px] overflow-y-auto text-zinc-400">
-                    {terminalLogs.map((log, index) => (<p key={index}>&gt; [TELEMETRY] {log}</p>))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </main>
-          </div>
-      )}
     </div>
   );
-}
-          
+      }
+              
