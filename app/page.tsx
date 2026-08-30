@@ -78,6 +78,7 @@ const TESTIMONIALS = [
     value: "$6,200 Project"
   }
 ];
+
 export default function IntegratedPortfolio(): JSX.Element {
   const [activeApp, setActiveApp] = useState<'portfolio' | 'dining' | 'ecommerce'>('portfolio');
   const [activeTab, setActiveTab] = useState<'overview' | 'work' | 'calculator' | 'contact'>('overview');
@@ -95,6 +96,7 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
   
   // FORM & NOTIFICATION STATES
+  const [formData, setFormData] = useState({ name: '', email: '', address: '', date: '', time: '', guests: '2' });
   const [notification, setNotification] = useState<string | null>(null);
 
   // CASE STUDY & ESTIMATOR STATES
@@ -107,7 +109,7 @@ export default function IntegratedPortfolio(): JSX.Element {
     analytics: true
   });
 
-  const triggerNotification = (msg: string): void => {
+const triggerNotification = (msg: string): void => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 3500);
   };
@@ -177,7 +179,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Console Deck</button>
+            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">â† Back To Console Deck</button>
             <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80">
               {(['home', 'menu', 'reservation', 'tracking', 'events'] as const).map((tab) => (
                 <button key={tab} onClick={() => setDiningTab(tab)} className={`px-3 py-1.5 rounded-lg text-xs capitalize font-medium transition-all ${diningTab === tab ? 'bg-zinc-800 text-white border border-zinc-700/50 shadow' : 'text-zinc-500 hover:text-zinc-300'}`}>{tab}</button>
@@ -215,7 +217,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                       {['All', 'Main', 'Starters', 'Desserts'].map((cat) => (
                         <button key={cat} onClick={() => setDiningFilter(cat)} className={`px-2.5 py-1 rounded text-[11px] font-medium transition-all ${diningFilter === cat ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-900 border border-zinc-800 text-zinc-400'}`}>{cat}</button>
                       ))}
-                    </div>
+                             </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {filteredDining.map((item) => (
@@ -250,7 +252,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </div>
                   )}
                   {diningManifest.length > 0 && (
-                    <button onClick={() => { triggerNotification("🚀 Secure Routing Protocol Initialized!"); setDiningTrackingActive(true); setDiningTab('tracking'); setDiningManifest([]); }} className="w-full bg-yellow-500 hover:bg-yellow-400 text-black text-[10px] font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-yellow-500/10">Initialize Secure Checkout</button>
+                    <button onClick={() => { triggerNotification("ðŸš€ Secure Routing Protocol Initialized!"); setDiningTrackingActive(true); setDiningTab('tracking'); setDiningManifest([]); }} className="w-full bg-yellow-500 hover:bg-yellow-400 text-black text-[10px] font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-yellow-500/10">Initialize Secure Checkout</button>
                   )}
                 </div>
               </div>
@@ -274,12 +276,12 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/70 backdrop-blur-xl border-b border-zinc-900/50 px-6 lg:px-16 py-4 flex items-center justify-between">
-            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Terminal Deck</button>
+            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">â† Return to Terminal Deck</button>
             <nav className="flex bg-zinc-900/40 border border-zinc-800/60 p-1 rounded-full">
               <button onClick={() => setEcomTab('shop')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Store Grid</button>
               <button onClick={() => setEcomTab('checkout')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Authorization</button>
             </nav>
-            <div className="relative bg-zinc-900/60 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center text-xs"><span>⚡</span>{cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-yellow-500 text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lg">{cartCount}</span>}</div>
+            <div className="relative bg-zinc-900/60 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center text-xs"><span>âš¡</span>{cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-yellow-500 text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lg">{cartCount}</span>}</div>
           </header>
           <main className="max-w-5xl mx-auto px-6 py-16">
             {ecomTab === 'shop' && (
@@ -311,7 +313,7 @@ export default function IntegratedPortfolio(): JSX.Element {
       {activeApp === 'portfolio' && (
         <main className="max-w-6xl mx-auto px-6 py-8 relative z-10">
 
-          {/* HEADER / NAVIGATION */}
+             {/* HEADER / NAVIGATION */}
           <header className="flex flex-wrap justify-between items-center gap-4 mb-16 pb-6 border-b border-zinc-900">
             <div className="flex items-center gap-3">
               <span className="text-2xl font-black bg-gradient-to-r from-yellow-400 via-amber-300 to-amber-500 bg-clip-text text-transparent font-mono tracking-wider">
@@ -357,8 +359,8 @@ export default function IntegratedPortfolio(): JSX.Element {
                 href="mailto:na0953237@gmail.com"
                 className="px-4 py-2 text-xs font-bold rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black transition-all"
               >
-                ✉️ Email Me
-              </a>
+                âœ‰ï¸ Email Me
+                </a>
             </div>
           </header>
 
@@ -399,7 +401,7 @@ export default function IntegratedPortfolio(): JSX.Element {
 
                 <div className="flex justify-center gap-4 pt-4">
                   <button onClick={() => setActiveTab('calculator')} className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs px-8 py-4 rounded-xl shadow-xl shadow-yellow-500/10 transition-all uppercase tracking-wider">
-                    Estimate Project Cost →
+                    Estimate Project Cost â†’
                   </button>
                   <button onClick={() => setActiveTab('work')} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-semibold text-xs px-8 py-4 rounded-xl transition-all uppercase tracking-wider">
                     Explore Case Studies
@@ -425,11 +427,11 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </div>
                     <div className="flex gap-3">
                       <button onClick={() => { handleNavigation('dining'); setDiningTab('home'); }} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 transition-all">Launch Console Demo</button>
-                      <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site 🚀</a>
+                      <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site ðŸš€</a>
                     </div>
                   </div>
 
-                  {/* APP 2: APEX MATRIX STORE */}
+                  {/* APP 2: APEX MATRIX STORE */}     
                   <div className="p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all flex flex-col justify-between gap-6 shadow-2xl">
                     <div>
                       <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white">Apex Matrix Storefront</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
@@ -437,7 +439,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                     </div>
                     <div className="flex gap-3">
                       <button onClick={() => { handleNavigation('ecommerce'); setEcomTab('shop'); }} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 transition-all">Launch Console Demo</button>
-                      <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site 🚀</a>
+                      <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site ðŸš€</a>
                     </div>
                   </div>
 
@@ -447,7 +449,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                       <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white">AI Blog Writer</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
                       <p className="text-xs text-zinc-400 mt-3 font-light leading-relaxed">Autonomous artificial intelligence platform engineered to parse text data streams and build technical content layouts seamlessly.</p>
                     </div>
-                    <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-6 py-2.5 rounded-xl transition-all block">Launch Live Platform 🚀</a>
+                    <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-6 py-2.5 rounded-xl transition-all block">Launch Live Platform ðŸš€</a>
                   </div>
                 </div>
               </section>
@@ -465,14 +467,14 @@ export default function IntegratedPortfolio(): JSX.Element {
                   {TESTIMONIALS.map((review, i) => (
                     <div key={i} className="bg-gradient-to-b from-zinc-900/60 to-zinc-950 border border-zinc-800/80 p-8 rounded-3xl space-y-6 backdrop-blur-xl">
                       <div className="flex justify-between items-center">
-                        <div className="flex gap-1 text-yellow-400 text-sm">{"★".repeat(review.rating)}</div>
+                        <div className="flex gap-1 text-yellow-400 text-sm">{"â˜…".repeat(review.rating)}</div>
                         <span className="text-[10px] font-mono text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-1 rounded-full font-bold">{review.value}</span>
                       </div>
                       <p className="text-xs text-zinc-300 italic font-light leading-relaxed">"{review.quote}"</p>
                       <div className="border-t border-zinc-800/80 pt-4 flex justify-between items-center">
                         <div>
                           <h4 className="text-xs font-bold text-white">{review.author}</h4>
-                          <p className="text-[10px] text-zinc-500">{review.role} • {review.location}</p>
+                          <p className="text-[10px] text-zinc-500">{review.role} â€¢ {review.location}</p>
                         </div>
                         <span className="text-[10px] font-mono text-zinc-600">VERIFIED</span>
                       </div>
@@ -509,7 +511,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                 </div>
 
                 {(() => {
-                  const cs = CASE_STUDIES.find(c => c.id === selectedCaseStudy)!;
+              const cs = CASE_STUDIES.find(c => c.id === selectedCaseStudy)!;
                   return (
                     <div className="lg:col-span-2 bg-zinc-900/40 border border-zinc-800/80 p-8 rounded-3xl space-y-8 backdrop-blur-xl">
                       <div className="flex flex-wrap justify-between items-start gap-4 pb-6 border-b border-zinc-800">
@@ -517,7 +519,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                           <span className="text-xs font-mono text-yellow-500">{cs.category}</span>
                           <h2 className="text-2xl font-bold text-white mt-1">{cs.title}</h2>
                         </div>
-                        <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all">Launch Production App 🚀</a>
+                        <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all">Launch Production App ðŸš€</a>
                       </div>
 
                       <div className="grid grid-cols-3 gap-4 font-mono">
@@ -615,7 +617,7 @@ export default function IntegratedPortfolio(): JSX.Element {
                   }}
                   className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs px-6 py-3.5 rounded-xl transition-all uppercase"
                 >
-                  Book Call For This Estimate →
+                  Book Call For This Estimate â†’
                 </button>
               </div>
             </div>
@@ -639,14 +641,14 @@ export default function IntegratedPortfolio(): JSX.Element {
                   rel="noopener noreferrer"
                   className="w-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black p-4 rounded-2xl flex items-center justify-center gap-3 font-bold transition-all"
                 >
-                  💬 Instant WhatsApp Technical Chat (+923103273904)
+                  ðŸ’¬ Instant WhatsApp Technical Chat (+923103273904)
                 </a>
 
                 <a 
                   href="mailto:na0953237@gmail.com?subject=Enterprise%20Project%20Inquiry"
                   className="w-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black p-4 rounded-2xl flex items-center justify-center gap-3 font-bold transition-all"
                 >
-                  ✉️ Send Detailed RFP / Brief via Email
+                  âœ‰ï¸ Send Detailed RFP / Brief via Email
                 </a>
               </div>
 
@@ -658,9 +660,13 @@ export default function IntegratedPortfolio(): JSX.Element {
 
           {/* FOOTER */}
           <footer className="mt-24 pt-8 border-t border-zinc-900 flex flex-wrap justify-between items-center text-xs text-zinc-600 font-mono">
-            <div>© {new Date().getFullYear()} Naveed. All rights reserved.</div>
+            <div>Â© {new Date().getFullYear()} Naveed. All rights reserved.</div>
             <div>Built with Next.js 14, TypeScript & Tailwind CSS</div>
           </footer>
 
         </main>
       )}
+
+    </div>
+  );
+                        }
