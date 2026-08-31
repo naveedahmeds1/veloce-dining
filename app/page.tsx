@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, JSX } from 'react';
 
-// === PREMIUM DATA LAYERS FOR E-COMMERCE CONSOLE ===
+// === PREMIUM PRODUCTS DATA FOR APEX COMBO CONSOLE ===
 const PREMIUM_PRODUCTS = [
   { 
     id: "p1", 
@@ -48,7 +48,7 @@ const CASE_STUDIES = [
   },
   {
     id: "cs2",
-    title: "Apex Matrix Storefront",
+    title: "Apex Combo Storefront",
     category: "High-Frequency B2B Hardware",
     client: "Apex Quantum Technologies",
     tech: ["React 18", "Tailwind CSS", "GraphQL", "Stripe API"],
@@ -59,7 +59,7 @@ const CASE_STUDIES = [
   }
 ];
 
-// === VERIFIED ENTERPRISE REVIEWS ===
+// === VERIFIED REVIEWS ===
 const TESTIMONIALS = [
   {
     quote: "Naveed transformed our outdated portal into a lightning-fast web suite. Our conversion rate jumped by 38% within the first month. Absolutely worth every dollar.",
@@ -90,16 +90,15 @@ export default function IntegratedPortfolio(): JSX.Element {
   const [diningTrackingActive, setDiningTrackingActive] = useState<boolean>(false);
   const [diningLogs, setDiningLogs] = useState<string[]>([]);
 
-  // E-COMMERCE CONSOLE STATES
+  // E-COMMERCE / APEX COMBO CONSOLE STATES
   const [cartCount, setCartCount] = useState<number>(0);
   const [ecomTab, setEcomTab] = useState<'shop' | 'checkout' | 'tracking'>('shop');
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
   
-  // FORM & NOTIFICATION STATES
-  const [formData, setFormData] = useState({ name: '', email: '', address: '', date: '', time: '', guests: '2' });
+  // NOTIFICATION & FORM STATES
   const [notification, setNotification] = useState<string | null>(null);
 
-  // CASE STUDY & ESTIMATOR STATES
+  // ESTIMATOR STATES
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<string>(CASE_STUDIES[0].id);
   const [projectScope, setProjectScope] = useState<number>(2500);
   const [features, setFeatures] = useState<{ [key: string]: boolean }>({
@@ -109,7 +108,7 @@ export default function IntegratedPortfolio(): JSX.Element {
     analytics: true
   });
 
-const triggerNotification = (msg: string): void => {
+  const triggerNotification = (msg: string): void => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 3500);
   };
@@ -164,7 +163,7 @@ const triggerNotification = (msg: string): void => {
   return (
     <div className="min-h-screen bg-[#030712] text-white relative font-sans antialiased text-left selection:bg-yellow-500/30 selection:text-yellow-200">
       
-      {/* Background Ambience Luxury Shadows */}
+      {/* Background Ambience Shadows */}
       <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-yellow-500/10 via-amber-500/5 to-transparent rounded-full blur-[140px] pointer-events-none z-0"></div>
       <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-yellow-500/5 via-orange-500/5 to-transparent rounded-full blur-[160px] pointer-events-none z-0"></div>
 
@@ -179,13 +178,15 @@ const triggerNotification = (msg: string): void => {
       {activeApp === 'dining' && (
         <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-zinc-900/80 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">â† Back To Console Deck</button>
+            <button onClick={() => { handleNavigation('portfolio'); setDiningTrackingActive(false); }} className="text-xs font-bold uppercase tracking-wider text-yellow-500 hover:text-yellow-400 transition-all">← Back To Console Deck</button>
             <nav className="flex items-center space-x-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80">
               {(['home', 'menu', 'reservation', 'tracking', 'events'] as const).map((tab) => (
                 <button key={tab} onClick={() => setDiningTab(tab)} className={`px-3 py-1.5 rounded-lg text-xs capitalize font-medium transition-all ${diningTab === tab ? 'bg-zinc-800 text-white border border-zinc-700/50 shadow' : 'text-zinc-500 hover:text-zinc-300'}`}>{tab}</button>
               ))}
             </nav>
-            <span className="text-[10px] bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded-full font-mono uppercase tracking-widest">Veloce Hub v3.0</span>
+            <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="text-[10px] bg-yellow-500 text-black font-bold px-3 py-1.5 rounded-full hover:bg-yellow-400 transition-all">
+              Launch Live Vercel App 🚀
+            </a>
           </header>
 
           <main className="max-w-5xl mx-auto px-4 py-12 relative z-10">
@@ -198,7 +199,7 @@ const triggerNotification = (msg: string): void => {
                     <p className="text-zinc-400 text-sm font-light leading-relaxed">Experience a state-of-the-art interactive digital lounge mapping dynamic molecular dishes with automated secure logistic delivery trackers.</p>
                     <div className="pt-4 flex gap-3">
                       <button onClick={() => setDiningTab('menu')} className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold text-xs px-5 py-3 rounded-xl shadow-lg shadow-yellow-500/10 transition-all">Explore Smart Menu</button>
-                      <button onClick={() => setDiningTab('reservation')} className="backdrop-blur-md bg-zinc-900/60 hover:bg-zinc-800 border border-zinc-800 text-xs px-5 py-3 rounded-xl font-medium transition-all">Book Secure Table</button>
+                      <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="backdrop-blur-md bg-zinc-900/60 hover:bg-zinc-800 border border-zinc-800 text-xs px-5 py-3 rounded-xl font-medium transition-all text-yellow-400">Visit Live Veloce Site ↗</a>
                     </div>
                   </div>
                 </div>
@@ -217,7 +218,7 @@ const triggerNotification = (msg: string): void => {
                       {['All', 'Main', 'Starters', 'Desserts'].map((cat) => (
                         <button key={cat} onClick={() => setDiningFilter(cat)} className={`px-2.5 py-1 rounded text-[11px] font-medium transition-all ${diningFilter === cat ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-900 border border-zinc-800 text-zinc-400'}`}>{cat}</button>
                       ))}
-                             </div>
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {filteredDining.map((item) => (
@@ -252,7 +253,7 @@ const triggerNotification = (msg: string): void => {
                     </div>
                   )}
                   {diningManifest.length > 0 && (
-                    <button onClick={() => { triggerNotification("ðŸš€ Secure Routing Protocol Initialized!"); setDiningTrackingActive(true); setDiningTab('tracking'); setDiningManifest([]); }} className="w-full bg-yellow-500 hover:bg-yellow-400 text-black text-[10px] font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-yellow-500/10">Initialize Secure Checkout</button>
+                    <button onClick={() => { triggerNotification("🚀 Secure Routing Protocol Initialized!"); setDiningTrackingActive(true); setDiningTab('tracking'); setDiningManifest([]); }} className="w-full bg-yellow-500 hover:bg-yellow-400 text-black text-[10px] font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-yellow-500/10">Initialize Secure Checkout</button>
                   )}
                 </div>
               </div>
@@ -272,22 +273,24 @@ const triggerNotification = (msg: string): void => {
         </div>
       )}
 
-      {/* ================= APEX MATRIX E-COMMERCE CONSOLE ================= */}
+      {/* ================= APEX COMBO CONSOLE ================= */}
       {activeApp === 'ecommerce' && (
         <div className="min-h-screen bg-black text-[#f5f5f7] font-sans relative z-10">
           <header className="sticky top-0 z-40 bg-black/70 backdrop-blur-xl border-b border-zinc-900/50 px-6 lg:px-16 py-4 flex items-center justify-between">
-            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">â† Return to Terminal Deck</button>
+            <button onClick={() => handleNavigation('portfolio')} className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-all">← Return to Terminal Deck</button>
             <nav className="flex bg-zinc-900/40 border border-zinc-800/60 p-1 rounded-full">
-              <button onClick={() => setEcomTab('shop')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Store Grid</button>
+              <button onClick={() => setEcomTab('shop')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'shop' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Apex Store Grid</button>
               <button onClick={() => setEcomTab('checkout')} className={`px-5 py-1.5 rounded-full text-xs transition-all ${ecomTab === 'checkout' ? 'bg-yellow-500 text-black font-semibold' : 'text-zinc-400'}`}>Authorization</button>
             </nav>
-            <div className="relative bg-zinc-900/60 border border-zinc-800 w-9 h-9 rounded-full flex items-center justify-center text-xs"><span>âš¡</span>{cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-yellow-500 text-black font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lg">{cartCount}</span>}</div>
+            <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-yellow-500 text-black px-4 py-2 rounded-full hover:bg-yellow-400 transition-all">
+              Apex Combo Vercel Link 🚀
+            </a>
           </header>
           <main className="max-w-5xl mx-auto px-6 py-16">
             {ecomTab === 'shop' && (
               <div className="space-y-16">
                 <div className="text-center max-w-2xl mx-auto">
-                  <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-5 leading-[1.15]">Tomorrow's Core Hardware. <br /><span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 via-zinc-400 to-zinc-600">Available for allocation today.</span></h1>
+                  <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-5 leading-[1.15]">Apex Combo Hardware.<br /><span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 via-zinc-400 to-zinc-600">High-performance B2B equipment console.</span></h1>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
                   {PREMIUM_PRODUCTS.map((product) => (
@@ -309,11 +312,11 @@ const triggerNotification = (msg: string): void => {
         </div>
       )}
 
-      {/* ================= MAIN HIGH-TICKET ENTERPRISE PORTFOLIO DECK ================= */}
+      {/* ================= MAIN PORTFOLIO DECK ================= */}
       {activeApp === 'portfolio' && (
         <main className="max-w-6xl mx-auto px-6 py-8 relative z-10">
 
-             {/* HEADER / NAVIGATION */}
+          {/* HEADER / NAVIGATION */}
           <header className="flex flex-wrap justify-between items-center gap-4 mb-16 pb-6 border-b border-zinc-900">
             <div className="flex items-center gap-3">
               <span className="text-2xl font-black bg-gradient-to-r from-yellow-400 via-amber-300 to-amber-500 bg-clip-text text-transparent font-mono tracking-wider">
@@ -323,7 +326,6 @@ const triggerNotification = (msg: string): void => {
                 Senior Full-Stack Engineer
               </span>
             </div>
-
             <nav className="flex items-center gap-1 bg-zinc-900/80 p-1.5 rounded-full border border-zinc-800/80 backdrop-blur-xl">
               {[
                 { id: 'overview', label: 'Overview' },
@@ -359,8 +361,8 @@ const triggerNotification = (msg: string): void => {
                 href="mailto:na0953237@gmail.com"
                 className="px-4 py-2 text-xs font-bold rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black transition-all"
               >
-                âœ‰ï¸ Email Me
-                </a>
+                ✉️ Email Me
+              </a>
             </div>
           </header>
 
@@ -384,24 +386,9 @@ const triggerNotification = (msg: string): void => {
                   I help funded startups and luxury brands build high-converting web applications, micro-saas tools, and custom dynamic dashboards with zero-latency performance.
                 </p>
 
-                {/* LIGHTHOUSE METRICS */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-2">
-                  {[
-                    { label: "Performance", score: "100/100" },
-                    { label: "Accessibility", score: "100/100" },
-                    { label: "Best Practices", score: "100/100" },
-                    { label: "SEO Optimized", score: "100/100" }
-                  ].map((m, idx) => (
-                    <div key={idx} className="bg-zinc-900/40 border border-zinc-800/80 p-4 rounded-2xl text-center backdrop-blur-md">
-                      <span className="text-xl font-bold font-mono block text-emerald-400">{m.score}</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-widest block mt-1">{m.label}</span>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="flex justify-center gap-4 pt-4">
                   <button onClick={() => setActiveTab('calculator')} className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs px-8 py-4 rounded-xl shadow-xl shadow-yellow-500/10 transition-all uppercase tracking-wider">
-                    Estimate Project Cost â†’
+                    Estimate Project Cost →
                   </button>
                   <button onClick={() => setActiveTab('work')} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-semibold text-xs px-8 py-4 rounded-xl transition-all uppercase tracking-wider">
                     Explore Case Studies
@@ -417,8 +404,8 @@ const triggerNotification = (msg: string): void => {
                   </span>
                   <h2 className="text-3xl font-bold text-white mt-3">Live Enterprise Demonstrations</h2>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* APP 1: VELOCE DINING */}
                   <div className="p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all flex flex-col justify-between gap-6 shadow-2xl">
                     <div>
@@ -427,29 +414,20 @@ const triggerNotification = (msg: string): void => {
                     </div>
                     <div className="flex gap-3">
                       <button onClick={() => { handleNavigation('dining'); setDiningTab('home'); }} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 transition-all">Launch Console Demo</button>
-                      <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site ðŸš€</a>
+                      <a href="https://veloce-dining.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Veloce Site 🚀</a>
                     </div>
                   </div>
 
-                  {/* APP 2: APEX MATRIX STORE */}     
+                  {/* APP 2: APEX COMBO STORE */}
                   <div className="p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all flex flex-col justify-between gap-6 shadow-2xl">
                     <div>
-                      <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white">Apex Matrix Storefront</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
+                      <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white">Apex Combo Console</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">UX SHOWCASE</span></div>
                       <p className="text-xs text-zinc-400 mt-3 font-light leading-relaxed">High-end B2B hardware storefront featuring parameter allocation, cart tracking, and secure network infrastructure authorization.</p>
                     </div>
                     <div className="flex gap-3">
                       <button onClick={() => { handleNavigation('ecommerce'); setEcomTab('shop'); }} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold px-5 py-2.5 rounded-xl text-yellow-500 transition-all">Launch Console Demo</button>
-                      <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Live Vercel Site ðŸš€</a>
+                      <a href="https://apex-combo-store.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all">Apex Combo Site 🚀</a>
                     </div>
-                  </div>
-
-                  {/* APP 3: AI BLOG WRITER */}
-                  <div className="p-8 backdrop-blur-xl bg-zinc-900/30 border border-zinc-800/80 hover:border-yellow-500/30 rounded-3xl transition-all flex flex-col justify-between gap-6 shadow-2xl">
-                    <div>
-                      <div className="flex justify-between items-start"><h3 className="text-xl font-bold text-white">AI Blog Writer</h3><span className="text-[10px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-2.5 py-1 rounded">AI CORE PLATFORM</span></div>
-                      <p className="text-xs text-zinc-400 mt-3 font-light leading-relaxed">Autonomous artificial intelligence platform engineered to parse text data streams and build technical content layouts seamlessly.</p>
-                    </div>
-                    <a href="https://aiblogwriter.vercel.app" target="_blank" rel="noopener noreferrer" className="w-fit bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-6 py-2.5 rounded-xl transition-all block">Launch Live Platform ðŸš€</a>
                   </div>
                 </div>
               </section>
@@ -467,14 +445,14 @@ const triggerNotification = (msg: string): void => {
                   {TESTIMONIALS.map((review, i) => (
                     <div key={i} className="bg-gradient-to-b from-zinc-900/60 to-zinc-950 border border-zinc-800/80 p-8 rounded-3xl space-y-6 backdrop-blur-xl">
                       <div className="flex justify-between items-center">
-                        <div className="flex gap-1 text-yellow-400 text-sm">{"â˜…".repeat(review.rating)}</div>
+                        <div className="flex gap-1 text-yellow-400 text-sm">{"★".repeat(review.rating)}</div>
                         <span className="text-[10px] font-mono text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-1 rounded-full font-bold">{review.value}</span>
                       </div>
                       <p className="text-xs text-zinc-300 italic font-light leading-relaxed">"{review.quote}"</p>
                       <div className="border-t border-zinc-800/80 pt-4 flex justify-between items-center">
                         <div>
                           <h4 className="text-xs font-bold text-white">{review.author}</h4>
-                          <p className="text-[10px] text-zinc-500">{review.role} â€¢ {review.location}</p>
+                          <p className="text-[10px] text-zinc-500">{review.role} • {review.location}</p>
                         </div>
                         <span className="text-[10px] font-mono text-zinc-600">VERIFIED</span>
                       </div>
@@ -509,9 +487,8 @@ const triggerNotification = (msg: string): void => {
                     </button>
                   ))}
                 </div>
-
                 {(() => {
-              const cs = CASE_STUDIES.find(c => c.id === selectedCaseStudy)!;
+                  const cs = CASE_STUDIES.find(c => c.id === selectedCaseStudy)!;
                   return (
                     <div className="lg:col-span-2 bg-zinc-900/40 border border-zinc-800/80 p-8 rounded-3xl space-y-8 backdrop-blur-xl">
                       <div className="flex flex-wrap justify-between items-start gap-4 pb-6 border-b border-zinc-800">
@@ -519,7 +496,7 @@ const triggerNotification = (msg: string): void => {
                           <span className="text-xs font-mono text-yellow-500">{cs.category}</span>
                           <h2 className="text-2xl font-bold text-white mt-1">{cs.title}</h2>
                         </div>
-                        <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all">Launch Production App ðŸš€</a>
+                        <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all">Launch Production App 🚀</a>
                       </div>
 
                       <div className="grid grid-cols-3 gap-4 font-mono">
@@ -556,11 +533,10 @@ const triggerNotification = (msg: string): void => {
                   Interactive Budget Calculator
                 </span>
                 <h2 className="text-3xl font-bold text-white mt-3 tracking-tight">Configure Your Project Scope</h2>
-                <p className="text-xs text-zinc-400 mt-1 font-light">Get an immediate estimate for high-end web development.</p>
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-mono uppercase text-zinc-400 block">// 1. Select Base Application Scope</label>
+                <label className="text-xs font-mono uppercase text-zinc-400 block">// Base Application Scope</label>
                 <div className="grid sm:grid-cols-3 gap-3">
                   {[
                     { name: "SaaS / Dashboard", cost: 2500 },
@@ -581,30 +557,6 @@ const triggerNotification = (msg: string): void => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <label className="text-xs font-mono uppercase text-zinc-400 block">// 2. Additional Core Modules</label>
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  {[
-                    { key: "cms", label: "Headless CMS Integration", price: "+$800" },
-                    { key: "payments", label: "Stripe / Crypto Payments", price: "+$600" },
-                    { key: "analytics", label: "Real-time Analytics", price: "+$500" }
-                  ].map((item) => (
-                    <label key={item.key} className="flex items-center gap-3 bg-black/40 border border-zinc-800 p-3.5 rounded-xl cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={features[item.key]}
-                        onChange={(e) => setFeatures({ ...features, [item.key]: e.target.checked })}
-                        className="accent-yellow-500 rounded"
-                      />
-                      <div>
-                        <div className="text-zinc-200 text-[11px]">{item.label}</div>
-                        <div className="text-[9px] font-mono text-yellow-500">{item.price}</div>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
               <div className="bg-black/60 border border-zinc-800 p-6 rounded-2xl flex flex-wrap justify-between items-center gap-4">
                 <div>
                   <span className="text-[10px] font-mono text-zinc-500 uppercase block">Estimated Contract Value</span>
@@ -617,9 +569,9 @@ const triggerNotification = (msg: string): void => {
                   }}
                   className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs px-6 py-3.5 rounded-xl transition-all uppercase"
                 >
-                  Book Call For This Estimate â†’
+                  Book Call For This Estimate →
                 </button>
-              </div>
+                </div>
             </div>
           )}
 
@@ -630,8 +582,7 @@ const triggerNotification = (msg: string): void => {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-3 py-1 rounded-full">
                   High-Priority Scheduling
                 </span>
-                <h2 className="text-3xl font-bold text-white mt-3">Book A 15-Minute Technical Call</h2>
-                <p className="text-xs text-zinc-400 mt-2 font-light">Discuss your project scope, architecture requirements, and timeline directly.</p>
+                <h2 className="text-3xl font-bold text-white mt-3">Book A Technical Call</h2>
               </div>
 
               <div className="space-y-4 text-left font-mono text-xs">
@@ -641,27 +592,23 @@ const triggerNotification = (msg: string): void => {
                   rel="noopener noreferrer"
                   className="w-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black p-4 rounded-2xl flex items-center justify-center gap-3 font-bold transition-all"
                 >
-                  ðŸ’¬ Instant WhatsApp Technical Chat (+923103273904)
+                  💬 WhatsApp Direct Chat (+923103273904)
                 </a>
 
                 <a 
                   href="mailto:na0953237@gmail.com?subject=Enterprise%20Project%20Inquiry"
                   className="w-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-black p-4 rounded-2xl flex items-center justify-center gap-3 font-bold transition-all"
                 >
-                  âœ‰ï¸ Send Detailed RFP / Brief via Email
+                  ✉️ Email Brief directly
                 </a>
-              </div>
-
-              <div className="pt-4 border-t border-zinc-800/80 text-[10px] text-zinc-500 font-mono">
-                GUARANTEED RESPONSE TIME: WITHIN 2 HOURS (EST & GMT TIMEZONES)
               </div>
             </div>
           )}
 
           {/* FOOTER */}
           <footer className="mt-24 pt-8 border-t border-zinc-900 flex flex-wrap justify-between items-center text-xs text-zinc-600 font-mono">
-            <div>Â© {new Date().getFullYear()} Naveed. All rights reserved.</div>
-            <div>Built with Next.js 14, TypeScript & Tailwind CSS</div>
+            <div>© {new Date().getFullYear()} Naveed. All rights reserved.</div>
+            <div>Next.js 14, TypeScript & Tailwind CSS</div>
           </footer>
 
         </main>
@@ -669,4 +616,4 @@ const triggerNotification = (msg: string): void => {
 
     </div>
   );
-                        }
+                  }
